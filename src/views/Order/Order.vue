@@ -1,14 +1,19 @@
 <template>
   order
+  <footer-guide class="footer" />
 </template>
 
 <script>
+import FooterGuide from '@/components/FooterGuide/FooterGuide.vue'
 export default {
-  name: 'MyOrder'
+  name: 'MyOrder',
+  components: {
+    FooterGuide
+  }
 
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>
