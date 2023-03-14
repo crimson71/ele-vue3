@@ -15,22 +15,34 @@ const routes = [
   {
     path: '/msite',
     component: Msite,
-    name: 'msite'
+    name: 'msite',
+    meta: {
+      showFooter: true
+    }
   },
   {
     path: '/order',
     component: Order,
-    name: 'order'
+    name: 'order',
+    meta: {
+      showFooter: true
+    }
   },
   {
     path: '/search',
     component: Search,
-    name: 'search'
+    name: 'search',
+    meta: {
+      showFooter: true
+    }
   },
   {
     path: '/profile',
     component: Profile,
-    name: 'profile'
+    name: 'profile',
+    meta: {
+      showFooter: true
+    }
   },
   {
     path: '/login',

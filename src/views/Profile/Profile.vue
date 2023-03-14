@@ -113,11 +113,10 @@
     </nav>
   </div>
 
-  <footer-guide class="footer" />
 </template>
 
 <script setup>
-import FooterGuide from '@/components/FooterGuide/FooterGuide.vue'
+
 </script>
 
 <style lang="scss" scoped>

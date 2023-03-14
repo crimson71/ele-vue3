@@ -103,8 +103,17 @@ import HeaderTop from '@/components/HeaderTop/HeaderTop.vue'
 import FooterGuide from '@/components/FooterGuide/FooterGuide.vue'
 import SwiperAd from '@/components/SwiperAd/SwiperAd.vue'
 import ShopList from '@/components/ShopList/ShopList.vue'
+import { onMounted } from 'vue'
+import { getFoodTypes } from '../../api/getData.js'
 const location = '12333333333'
+const getLocation = async () => {
+  const { data } = await getFoodTypes()
+  console.log(data)
+}
+onMounted(
+  getLocation()
 
+)
 </script>
 
 <style lang="scss" scoped>
