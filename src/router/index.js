@@ -4,6 +4,8 @@ const Order = () => import('../views/Order/Order.vue')
 const Search = () => import('../views/Search/Search.vue')
 const Profile = () => import('../views/Profile/Profile.vue')
 const Login = () => import('../views/Login/Login.vue')
+const PhoneLogin = () => import('../views/Login/Children/PhoneLogin.vue')
+const PasswordLogin = () => import('../views/Login/Children/PasswordLogin.vue')
 
 const routes = [
   {
@@ -33,7 +35,21 @@ const routes = [
   {
     path: '/login',
     component: Login,
-    name: 'login'
+    name: 'login',
+    redirect: '/login/phonelogin',
+    children: [
+      {
+        path: 'phonelogin',
+        component: PhoneLogin,
+        name: 'phonelogin'
+      },
+      {
+        path: 'passwordlogin',
+        component: PasswordLogin,
+        name: 'passwordlogin'
+      }
+    ]
+
   }
 
 ]

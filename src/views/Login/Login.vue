@@ -1,11 +1,12 @@
 <template>
-  login
+  <router-view> </router-view>
+  <footer-guide></footer-guide>
+
 </template>
 
-<script>
-export default {
+<script setup>
+import FooterGuide from '@/components/FooterGuide/FooterGuide.vue'
 
-}
 </script>
 
 <style>
