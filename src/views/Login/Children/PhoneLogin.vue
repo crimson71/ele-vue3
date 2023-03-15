@@ -11,7 +11,7 @@
     </div>
     <div class="login-body">
       <div class="login-title">手机号登录</div>
-      <form>
+      <form @submit.prevent="login">
         <div class="phone">
           <input type="text" placeholder="请输入手机号" v-model="phone" />
           <button
@@ -25,7 +25,7 @@
           </button>
         </div>
         <br />
-        <input type="text" placeholder="验证码" />
+        <input type="text" placeholder="验证码" v-model="code" />
         <button class="login-btn">登陆</button>
         <div class="allow">
           <input type="checkbox" name="" id="allow" />
@@ -59,6 +59,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 const phone = ref('') // 电话号码
+const code = ref('') // 验证码
 const countdownNum = ref(0)
 // 校验手机号码
 const rightPhone = computed(() => {
@@ -75,6 +76,17 @@ const getCode = () => {
         clearInterval(timer)
       }
     }, 1000)
+  }
+}
+
+// 前台表单验证
+const login = () => {
+  if (!rightPhone.value) {
+    // 手机号不正确
+    alert('手机号不正确')
+  } else if (!/^\d{6}$/.test(code)) {
+    // 验证码不正确
+    alert('验证码不正确')
   }
 }
 </script>
