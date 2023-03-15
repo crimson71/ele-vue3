@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-const Msite = () => import('../views/Miste/Miste.vue')
+const Msite = () => import('../views/Msite/Msite.vue')
 const Order = () => import('../views/Order/Order.vue')
 const Search = () => import('../views/Search/Search.vue')
 const Profile = () => import('../views/Profile/Profile.vue')

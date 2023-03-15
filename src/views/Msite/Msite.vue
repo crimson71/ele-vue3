@@ -28,63 +28,63 @@
     <nav >
       <ul class="food">
         <li class="li">
-          <img src="../Miste/images/nav/1.jpg" />
+          <img src="../Msite/images/nav/1.jpg" />
           <span> 美食外卖 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/2.jpg" />
+          <img src="../Msite/images/nav/2.jpg" />
           <span> 超市便利 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/3.jpg" />
+          <img src="../Msite/images/nav/3.jpg" />
           <span> 水果 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/4.jpg" />
+          <img src="../Msite/images/nav/4.jpg" />
           <span> 跑腿 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/5.jpg" />
+          <img src="../Msite/images/nav/5.jpg" />
           <span> 买药 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/6.jpg" />
+          <img src="../Msite/images/nav/6.jpg" />
           <span> 晚餐 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/7.jpg" />
+          <img src="../Msite/images/nav/7.jpg" />
           <span> 甜品饰品 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/8.jpg" />
+          <img src="../Msite/images/nav/8.jpg" />
           <span> 0元领水果 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/9.jpg" />
+          <img src="../Msite/images/nav/9.jpg" />
           <span> 天天爆红包 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/10.jpg" />
+          <img src="../Msite/images/nav/10.jpg" />
           <span> 买菜 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/11.jpg" />
+          <img src="../Msite/images/nav/11.jpg" />
           <span> 鲜花绿植 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/12.jpg" />
+          <img src="../Msite/images/nav/12.jpg" />
           <span> 家常菜 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/13.jpg" />
+          <img src="../Msite/images/nav/13.jpg" />
           <span> 大型超市 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/14.jpg" />
+          <img src="../Msite/images/nav/14.jpg" />
           <span> 天天赚现金 </span>
         </li>
         <li class="li">
-          <img src="../Miste/images/nav/1.jpg" />
+          <img src="../Msite/images/nav/1.jpg" />
           <span> 省钱好券 </span>
         </li>
       </ul>
