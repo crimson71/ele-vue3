@@ -5,6 +5,7 @@ import store from './store'
 import './common/sass/comm.scss'
 import SvgIcon from '@/components/Svg.vue'
 import './assets/icons'
+import '@/mock/mockServer'
 
 createApp(App)
   .use(store)

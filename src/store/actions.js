@@ -1,4 +1,5 @@
 import {
+  RECEIVE_CITY,
   RECEIVE_ADDRESS,
   RECEIVE_FOODTYPE,
   RECEIVE_SHOPS
@@ -6,10 +7,20 @@ import {
 import {
   getAddress,
   getFoodTypes,
-  getShopList
+  getShopList,
+  getLocalPosition
 } from '../api/getData'
 
 export default {
+// 异步获取当前城市
+  async getCity ({ commit, state }) {
+    const { data } = await getLocalPosition({ type: 'guesss' })
+    if (data) {
+      const { latitude, longitude } = data
+      commit(RECEIVE_CITY, { latitude, longitude })
+    }
+  },
+
   // 异步获取地址
   async getAddress ({ commit, state }) {
     const geohash = state.latitude + ',' + state.longtitude

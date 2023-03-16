@@ -79,6 +79,7 @@ const switchShowPwd = () => {
       .switch_show_pwd {
        @include ct;
        right: 3px;
+       top: 25%;
 
       }
     }

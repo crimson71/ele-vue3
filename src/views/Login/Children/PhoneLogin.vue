@@ -58,6 +58,7 @@
 
 <script setup>
 import { computed, ref } from 'vue'
+import { phoneLogin } from '@/api/getData'
 const phone = ref('') // 电话号码
 const code = ref('') // 验证码
 const countdownNum = ref(0)
@@ -80,7 +81,7 @@ const getCode = () => {
 }
 
 // 前台表单验证
-const login = () => {
+const login = async () => {
   if (!rightPhone.value) {
     // 手机号不正确
     alert('手机号不正确')
@@ -88,6 +89,8 @@ const login = () => {
     // 验证码不正确
     alert('验证码不正确')
   }
+  const result = await phoneLogin({ phone: phone, code: code })
+  console.log(result)
 }
 </script>
 
