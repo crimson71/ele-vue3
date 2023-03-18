@@ -12,22 +12,20 @@ import {
 } from '../api/getData'
 
 export default {
-// 异步获取当前城市
-  async getCity ({ commit, state }) {
+// 异步获取当前城市,生成geohash
+  async getCity ({ commit }) {
     const { data } = await getLocalPosition({ type: 'guesss' })
     if (data.code === 0) {
       const { latitude, longitude } = data.data
-      const geohash = latitude + ',' + longitude
-      commit(RECEIVE_CITY, { latitude, longitude, geohash })
+      commit(RECEIVE_CITY, { latitude, longitude })
     }
   },
 
   // 异步获取地址
   async getAddress ({ commit, state }) {
-    console.log(state.geohash, '1222')
-    const result = await getAddress(state.geohash)
-    if (result.code === 0) {
-      const address = result.data
+    const { data } = await getAddress(state.geohash)
+    if (data) {
+      const address = data
       commit(RECEIVE_ADDRESS, { address })
     }
   },

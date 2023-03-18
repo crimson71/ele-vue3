@@ -27,7 +27,7 @@ export const getFoodTypes = () => {
 export const getShopList = (params) => {
   return request({
     method: 'get',
-    url: 'shops',
+    url: 'shopping/restaurants',
     data: params
   })
 }

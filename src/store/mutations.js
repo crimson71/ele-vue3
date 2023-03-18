@@ -10,7 +10,7 @@ export default {
   [RECEIVE_CITY] (state, { latitude, longitude, geohash }) {
     state.latitude = latitude
     state.longitude = longitude
-    state.geohash = geohash
+    state.geohash = latitude + ',' + longitude
   },
 
   [RECEIVE_ADDRESS] (state, { address }) {

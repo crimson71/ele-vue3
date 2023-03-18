@@ -11,7 +11,11 @@
     </header-top>
     <!-- 搜索加定位 -->
     <div class="location">
-      <span class="lc-title">{{ storeState.latitude}}{{storeState.longitude }}</span>
+      <span class="lc-title">
+        <svg-icon name="location"></svg-icon>
+        {{ storeState.address.address }}
+        <span class="text-xs float-right leading-10">美食果蔬医药.30分钟送达</span>
+      </span>
     </div>
 
     <router-link :to="{ name: 'search' }" class="search">
@@ -98,29 +102,17 @@
 import HeaderTop from '@/components/HeaderTop/HeaderTop.vue'
 import FooterGuide from '@/components/FooterGuide/FooterGuide.vue'
 import SwiperAd from '@/components/SwiperAd/SwiperAd.vue'
-
-import { computed, onBeforeMount, onMounted } from 'vue'
+import { onBeforeMount, computed } from 'vue'
+import ShopList from '@/components/ShopList/ShopList.vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
-
-const storeState = computed(() => {
-  const latitude = store.state.latitude
-  const longitude = store.state.longitude
-  const address = store.state.address
-  return {
-    latitude,
-    longitude,
-    address
-  }
-})
-
 onBeforeMount(() => {
-  store.dispatch('getCity')
-})
-
-onMounted(() => {
   store.dispatch('getAddress')
+})
+const storeState = computed(() => {
+  const address = store.state.address
+  return { address }
 })
 </script>
 
@@ -137,17 +129,26 @@ onMounted(() => {
     color: #fff;
   }
   .location {
+    display: flex;
+    justify-content: space-between;
     background: $blue;
     width: 100%;
-    height: 30px;
-    line-height: 30px;
+    @include font(50px, 50px);
+    background: $blue;
+
     .lc-title {
+      background: #fff;
+      border-radius: 10px 10px 0 0;
+      @include sc(16px, #666);
       display: inline-block;
       width: 100%;
       height: 100%;
 
-      border-radius: 10px 10px 0 0;
-      background: #fff;
+      .svg-icon {
+        vertical-align: middle;
+        fill: #666;
+        display: inline;
+      }
     }
   }
 
