@@ -15,16 +15,17 @@ export default {
 // 异步获取当前城市
   async getCity ({ commit, state }) {
     const { data } = await getLocalPosition({ type: 'guesss' })
-    if (data) {
-      const { latitude, longitude } = data
-      commit(RECEIVE_CITY, { latitude, longitude })
+    if (data.code === 0) {
+      const { latitude, longitude } = data.data
+      const geohash = latitude + ',' + longitude
+      commit(RECEIVE_CITY, { latitude, longitude, geohash })
     }
   },
 
   // 异步获取地址
   async getAddress ({ commit, state }) {
-    const geohash = state.latitude + ',' + state.longtitude
-    const result = await getAddress(geohash)
+    console.log(state.geohash, '1222')
+    const result = await getAddress(state.geohash)
     if (result.code === 0) {
       const address = result.data
       commit(RECEIVE_ADDRESS, { address })

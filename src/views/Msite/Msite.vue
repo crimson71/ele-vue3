@@ -1,21 +1,17 @@
 <template>
   <div class="msite-container">
     <!-- 头部 -->
-    <header-top >
-    <template v-slot:left>
-      <span class="title">
-        饿了么
-      </span>
-    </template>
-    <template v-slot:right>
-      <span class="login">
-        登陆 | 注册
-      </span>
-    </template>
-  </header-top>
+    <header-top>
+      <template v-slot:left>
+        <span class="title"> 饿了么 </span>
+      </template>
+      <template v-slot:right>
+        <span class="login"> 登陆 | 注册 </span>
+      </template>
+    </header-top>
     <!-- 搜索加定位 -->
     <div class="location">
-      <span class="lc-title">{{location}}</span>
+      <span class="lc-title">{{ storeState.latitude}}{{storeState.longitude }}</span>
     </div>
 
     <router-link :to="{ name: 'search' }" class="search">
@@ -25,7 +21,7 @@
     </router-link>
 
     <!-- 导航 -->
-    <nav >
+    <nav>
       <ul class="food">
         <li class="li">
           <img src="../Msite/images/nav/1.jpg" />
@@ -90,7 +86,7 @@
       </ul>
     </nav>
     <!-- 轮播广告区 -->
-    <swiper-ad ></swiper-ad>
+    <swiper-ad></swiper-ad>
 
     <!-- 店铺列表 -->
     <shop-list></shop-list>
@@ -102,11 +98,30 @@
 import HeaderTop from '@/components/HeaderTop/HeaderTop.vue'
 import FooterGuide from '@/components/FooterGuide/FooterGuide.vue'
 import SwiperAd from '@/components/SwiperAd/SwiperAd.vue'
-import ShopList from '@/components/ShopList/ShopList.vue'
-import { computed, onBeforeMount, onMounted } from 'vue'
-import { mapState } from 'vuex'
-import { useState } from '@/hook/useState'
 
+import { computed, onBeforeMount, onMounted } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
+
+const storeState = computed(() => {
+  const latitude = store.state.latitude
+  const longitude = store.state.longitude
+  const address = store.state.address
+  return {
+    latitude,
+    longitude,
+    address
+  }
+})
+
+onBeforeMount(() => {
+  store.dispatch('getCity')
+})
+
+onMounted(() => {
+  store.dispatch('getAddress')
+})
 </script>
 
 <style lang="scss" scoped>
@@ -134,10 +149,9 @@ import { useState } from '@/hook/useState'
       border-radius: 10px 10px 0 0;
       background: #fff;
     }
-
   }
 
-    .search {
+  .search {
     background: #fff;
     display: block;
     position: relative;
@@ -146,11 +160,11 @@ import { useState } from '@/hook/useState'
     height: 40px;
     border-radius: 20px;
     .search-icon {
-    position: absolute;
-    top: 6px;
-    left: 8px;
-    fill: rgba(0, 0, 0, 0.3);
-  }
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      fill: rgba(0, 0, 0, 0.3);
+    }
 
     .placeholder {
       color: rgba(0, 0, 0, 0.5);
@@ -197,7 +211,5 @@ import { useState } from '@/hook/useState'
       }
     }
   }
-
 }
-
 </style>
