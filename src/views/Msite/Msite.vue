@@ -12,14 +12,14 @@
     <!-- 搜索加定位 -->
     <div class="location">
       <span class="lc-title">
-        <svg-icon name="location"></svg-icon>
+        <svg-icon name="location" style="width: 1rem;height: 1rem;"></svg-icon>
         {{ storeState.address.address }}
-        <span class="text-xs float-right leading-10">美食果蔬医药.30分钟送达</span>
+        <span class="text-xs float-right px-1 " style="font-size: .2rem;line-height: 2rem;">美食果蔬医药.30分钟送达</span>
       </span>
     </div>
 
     <router-link :to="{ name: 'search' }" class="search">
-      <svg-icon name="search" class="search-icon"></svg-icon>
+      <svg-icon name="search" class="search-icon" style="width: 1rem;height: 1rem;"></svg-icon>
       <span class="placeholder">请输入关键字</span>
       <input type="button" class="search-bth" value="搜索" />
     </router-link>
@@ -93,7 +93,7 @@
     <swiper-ad></swiper-ad>
 
     <!-- 店铺列表 -->
-    <shop-list></shop-list>
+    <shop-list ></shop-list>
     <footer-guide class="footer" />
   </div>
 </template>
@@ -114,13 +114,15 @@ const storeState = computed(() => {
   const address = store.state.address
   return { address }
 })
+
 </script>
 
 <style lang="scss" scoped>
 @import '../../common/sass/mixin.scss';
 .msite-container {
   width: 100%;
-  padding: 0 10px;
+  padding: 0 0.1rem;
+
   .title {
     color: #fff;
   }
@@ -133,16 +135,17 @@ const storeState = computed(() => {
     justify-content: space-between;
     background: $blue;
     width: 100%;
-    @include font(50px, 50px);
+    @include font(2rem, 2rem);
     background: $blue;
 
     .lc-title {
       background: #fff;
-      border-radius: 10px 10px 0 0;
-      @include sc(16px, #666);
+      border-radius: 1rem 1rem 0 0;
+      @include sc(.6rem, #666);
       display: inline-block;
+      line-height: 2rem;
       width: 100%;
-      height: 100%;
+      height: 2rem;
 
       .svg-icon {
         vertical-align: middle;
@@ -158,57 +161,57 @@ const storeState = computed(() => {
     position: relative;
     border: 1px solid $blue;
     width: 100%;
-    height: 40px;
-    border-radius: 20px;
+    height: 2rem;
+    border-radius: 1rem;
     .search-icon {
       position: absolute;
-      top: 6px;
-      left: 8px;
+      top: .5rem;
+      left: .2rem;
       fill: rgba(0, 0, 0, 0.3);
     }
 
     .placeholder {
       color: rgba(0, 0, 0, 0.5);
       position: absolute;
-      top: 8px;
-      left: 38px;
+      top: .2rem;
+      left: 2rem;
     }
     .search-bth {
       display: inline-block;
-      top: -1px;
+      top: -0.01rem;
       right: 0;
       position: absolute;
       background: $blue;
       width: 25%;
-      height: 40px;
-      border-radius: 20px;
+      height: 2rem;
+      border-radius: 1rem;
       color: #fff;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 1rem;
       text-align: center;
     }
   }
 
   .food {
     background: #fff;
-    padding-top: 20px;
+    padding-top: 1.2rem;
     display: flex;
     flex-wrap: wrap;
     margin: auto;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 0.7rem;
 
     .li {
       display: flex;
       flex-direction: column;
       color: #666;
       width: 20%;
-      font-size: 14px;
-      margin-bottom: 5px;
+      font-size: 0.5rem;
+      margin-bottom: 0.1rem;
       img {
         margin: auto;
-        width: 38px;
-        height: 38px;
+        width: 2rem;
+        height: 2rem;
       }
     }
   }

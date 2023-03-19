@@ -5,7 +5,7 @@
           name="star-fill"
           v-for="num in 5"
           :key="num"
-          style="width: 15px;height: 15px;"
+          style="width: .6rem;height: .6rem;"
           class="grey-star "
         ></svg-icon>
       </div>
@@ -15,7 +15,7 @@
           name="star-fill"
           v-for="num in 5"
           :key="num"
-          style="width: 15px;height: 15px;"
+          style="width: .6rem;height: .6rem;"
           class="orange-star "
         ></svg-icon>
       </div>
@@ -37,7 +37,7 @@ const props = defineProps({
 @import '../common/sass/mixin.scss';
 .rate-container {
   position: relative;
-  @include wh(75px,15px);
+  @include wh(3rem,0.95rem);
 
   .star-container {
     position: absolute;

@@ -40,17 +40,17 @@
       </form>
     </div>
     <div class="login-bottom">
-      <p class="problem"><a href="#" class="link">遇到问题</a></p>
+      <p class="problem"><a href="#" class="link text-sm">遇到问题</a></p>
       <p>其他登陆方式</p>
       <p>
         原通过 <span class="bold">QQ</span>或
         <span class="bold">微博</span>登陆的用户可直接使用绑定手机号登录
       </p>
       <p class="account-icons">
-        <svg-icon name="alipay" style="width: 25%; height: 50px"></svg-icon>
-        <svg-icon name="taobao" style="width: 25%; height: 50px"></svg-icon>
-        <svg-icon name="wechat" style="width: 25%; height: 50px"></svg-icon>
-        <svg-icon name="apple" style="width: 25%; height: 50px"></svg-icon>
+        <svg-icon name="alipay" style="width: 25%; height: 3rem"></svg-icon>
+        <svg-icon name="taobao" style="width: 25%; height: 3rem"></svg-icon>
+        <svg-icon name="wechat" style="width: 25%; height: 3rem"></svg-icon>
+        <svg-icon name="apple" style="width: 25%; height: 3rem"></svg-icon>
       </p>
     </div>
   </div>
@@ -97,33 +97,33 @@ const login = async () => {
 <style lang="scss" scoped>
 @import '../../../common/sass/mixin.scss';
 .login-container {
-  padding: 10px;
+  padding:.6rem;
   background: #fff;
   .login-header {
     display: flex;
     justify-content: space-between;
 
-    height: 50px;
-    line-height: 50px;
+    height: 3rem;
+    line-height: 3rem;
     .psw-login {
-      font-size: 20px;
+      font-size: 0.9rem;
     }
   }
   .login-body {
     .login-title {
-      height: 50px;
-      line-height: 50px;
-      font-size: 25px;
+      height: 3rem;
+      line-height: 3rem;
+      font-size: 1.3rem;
       font-weight: 700;
     }
     input {
       width: 100%;
-      height: 50px;
-      margin-bottom: 10px;
+      height: 3rem;
+      margin-bottom: 0.6rem;
       border-bottom: 1px solid #ccc;
-      padding: 0 10px;
-      font-size: 20px;
-      color: 20px;
+      padding: 0 .8rem;
+      font-size: 0.9rem;
+      color: 0.9rem;
       font-weight: normal;
       outline: none;
     }
@@ -133,16 +133,17 @@ const login = async () => {
       width: 100%;
       .captcha {
         display: inline-block;
-        right: 10px;
+        font-size:.6rem ;
+        right: .6rem;
         position: absolute;
         background: #fff;
         width: 28%;
-        height: 40px;
-        @include borderRadius(20px);
+        height: 1.5rem;
+        @include borderRadius(0.9rem);
         border: 1px solid #ccc;
-        top: -8px;
+        top: 1rem;
         color: #ccc;
-        line-height: 40px;
+        line-height: 1.5rem;
         text-align: center;
 
       }
@@ -153,40 +154,42 @@ const login = async () => {
     }
 
     .login-btn {
-      @include wh(100%, 40px);
-      border-radius: 25px;
+      @include wh(100%, 3.5rem);
+      border-radius: 1.5rem;
       border: 0;
       color: #444;
-      font-size: 18px;
+      font-size: 0.9rem;
     }
     .allow {
       width: 100%;
+      font-size: .5rem;
 
       color: #ccc;
       font-weight: normal;
       input {
         display: inline;
-        @include wh(15px, 15px);
-        margin-right: 5px;
+        @include wh(0.5rem, 0.5rem);
+        margin-right: 0.3rem;
         vertical-align: baseline;
       }
     }
   }
   .login-bottom {
-    padding-top: 100px;
+    padding-top: 6rem;
+    font-size: .7rem;
 
     text-align: center;
     color: #ccc;
     .problem {
-      font-size: 18px;
-      height: 50px;
-      line-height: 50px;
-      margin-bottom: 20px;
+      font-size: 1.1rem;
+      height: 3rem;
+      line-height: 3rem;
+      margin-bottom: 0.9rem;
     }
     .account-icons {
       display: flex;
-      margin-top: 20px;
-      padding: 0 50px;
+      margin-top: 0.9rem;
+      padding: 0 3rem;
     }
   }
   .link {
@@ -194,7 +197,7 @@ const login = async () => {
   }
   .bold {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 0.9rem;
   }
 }
 </style>

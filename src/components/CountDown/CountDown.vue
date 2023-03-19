@@ -42,20 +42,20 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .countdown-contaniner {
-  height: 22px;
-  line-height: 22px;
+  height: 0.9rem;
+  line-height: 0.9rem;
 
   display: flex;
   color:red;
-  font-size: 16px;
+  font-size: 0.5rem;
   .hour,
   .minute,
   .seconds {
-    padding:0px 5px;
-    height: 22px;
-    line-height: 22px;
+    padding:0px 0.1rem;
+    height: 0.9rem;
+    line-height: .9rem;
 
-    border-radius: 5px;
+    border-radius: 0.3rem;
 
     background: red;
     color: #fff;

@@ -7,6 +7,7 @@ import SvgIcon from '@/components/Svg.vue'
 import './assets/icons'
 import '@/mock/mockServer'
 import '@/index.css'
+import '@/config/rem.js'
 
 createApp(App)
   .use(store)

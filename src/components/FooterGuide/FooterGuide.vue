@@ -46,6 +46,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../common/sass/mixin.scss';
 .footer-container {
+  z-index: 999;
   width: 100%;
   display: flex;
   height: 62.8px;

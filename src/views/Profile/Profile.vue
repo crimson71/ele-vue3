@@ -5,7 +5,7 @@
         <svg-icon
           name="person"
           class="login-icon"
-          style="width: 40px; height: 40px"
+          style="width: 1.5rem; height: 1.5rem"
         ></svg-icon>
         <span>立即登陆</span>
       </div>
@@ -13,12 +13,12 @@
         <svg-icon
           name="setting"
           fill="#000"
-          style="width: 30px; height: 30px"
+          style="width: 1.5rem; height: 1.5rem"
         ></svg-icon>
         <svg-icon
           name="qa"
           fill="#000"
-          style="width: 30px; height: 30px"
+          style="width: 1.5rem; height: 1.5rem"
         ></svg-icon>
       </div>
     </router-link>
@@ -26,13 +26,13 @@
     <div class="zc-box">
       <div class="zc-left">
         <svg-icon name="wjj" style="margin: auto;"></svg-icon>
-        <span style="margin-top: 5px;">我的资产</span>
+        <span style="margin-top: 0.3rem;">我的资产</span>
       </div>
       <div class="zc-right">
         <div class="right-item">
           <svg-icon
             name="hb"
-            style="width: 40px; height: 40px"
+            style="width: 3rem; height: 3rem"
             class="zc-icon"
           ></svg-icon>
           <span class="zc-title">红包</span>
@@ -41,7 +41,7 @@
         <div class="right-item">
           <svg-icon
             name="youhuijuan"
-            style="width: 40px; height: 40px"
+            style="width: 3rem; height: 3rem"
             class="zc-icon"
           ></svg-icon>
           <span class="zc-title">券包</span>
@@ -50,7 +50,7 @@
         <div class="right-item">
           <svg-icon
             name="kb"
-            style="width: 40px; height: 40px"
+            style="width: 3rem; height: 3rem"
             class="zc-icon"
           ></svg-icon>
           <span class="zc-title">卡包</span>
@@ -122,39 +122,39 @@
 <style lang="scss" scoped>
 @import '../../common/sass/mixin.scss';
 .profile-container {
-  padding: 0 10px;
+  padding: 0 0.5rem;
   .login-box {
     width: 100%;
-    height: 50px;
-    line-height: 50px;
-    margin-bottom: 10px;
-
+    height: 3rem;
+    line-height: 3rem;
+    margin-bottom: 0.8rem;
     display: flex;
     justify-content: space-between;
     .login-icon {
       fill: $blue;
       vertical-align: middle;
+
     }
     span {
-      font-size: 25px;
+      font-size: 1rem;
       font-weight: 700;
-      margin-left: 10px;
+      // margin-left: 0.8rem;
     }
     .login-right {
       .svg-icon {
-        margin-left: 10px;
+        margin-left: 0.8rem;
         vertical-align: middle;
       }
     }
   }
   .zc-box {
-    height: 80px;
+    height: 5rem;
 
     width: 100%;
     display: flex;
     background: #fff;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    border-radius: 0.3rem;
+    margin-bottom: 0.8rem;
     .zc-left {
       width: 30%;
       display: flex;
@@ -173,18 +173,18 @@
         .zc-icon {
           margin: auto;
           fill: red;
-          margin-bottom: 5px;
+          margin-bottom: .3rem;
         }
         .zc-title {
           color:#000;
           font-weight: 700;
-          font-size: 16px;
-          margin-bottom: 3px;
+          font-size: 1rem;
+          margin-bottom: 0.2rem;
         }
         .zc-detail {
           color:#666;
 
-          font-size: 10px;
+          font-size: 0.8rem;
 
         }
       }
@@ -198,18 +198,18 @@
       flex-wrap: wrap;
       li {
         text-align: center;
-        height: 80px;
+        height: 5rem;
         display: flex;
         flex-direction: column;
 
         width: 25%;
         .nav-icon {
-          margin:20px auto;
-          margin-bottom: 2px;
+          margin:1.2rem auto;
+          margin-bottom: 0.1rem;
           fill: #000;
         }
         .nav-name {
-          font-size: 14px;
+          font-size: 0.8rem;
         }
       }
     }

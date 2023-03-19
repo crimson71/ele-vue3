@@ -55,30 +55,29 @@ const switchShowPwd = () => {
 <style lang="scss" scoped>
 @import '../../../common/sass/mixin.scss';
 .login-container {
-  padding: 10px;
+  padding: .6rem;
   background: #fff;
   .login-header {
     display: flex;
     justify-content: space-between;
-
-    height: 50px;
-    line-height: 50px;
+    height: 3rem;
+    line-height: 3rem;
     .psw-login {
-      font-size: 20px;
+      font-size: .9rem;
     }
   }
   .login-body {
     .login-title {
-      height: 50px;
-      line-height: 50px;
-      font-size: 25px;
+      height: 3rem;
+      line-height: 3rem;
+      font-size: 1.2rem;
       font-weight: 700;
     }
     .pwd_container {
       position: relative;
       .switch_show_pwd {
        @include ct;
-       right: 3px;
+       right: 0.2rem;
        top: 25%;
 
       }
@@ -86,12 +85,12 @@ const switchShowPwd = () => {
     input {
       display: block;
       width: 100%;
-      height: 50px;
-      margin-bottom: 10px;
+      height: 2rem;
+      margin-bottom: 0.7rem;
       border-bottom: 1px solid #ccc;
-      padding: 0 10px;
-      font-size: 20px;
-      color: 20px;
+      padding: 0 .7rem;
+      font-size: .9rem;
+      color: 1.2rem;
       font-weight: normal;
       outline: none;
     }
@@ -101,21 +100,21 @@ const switchShowPwd = () => {
     }
 
     .login-btn {
-      border-radius: 25px;
+      border-radius: 1.2rem;
       border: 0;
       color: #444;
-      font-size: 18px;
+      font-size: 1.1rem;
     }
     .allow {
       width: 100%;
-      padding-top: 100px;
-
+      padding-top: 6rem;
+      font-size: .9rem;
       color: #ccc;
       font-weight: normal;
       input {
         display: inline;
-        @include wh(15px, 15px);
-        margin-right: 5px;
+        @include wh(0.8rem, .8rem);
+        margin-right: .3rem;
         vertical-align: baseline;
       }
     }
@@ -123,10 +122,11 @@ const switchShowPwd = () => {
 
   .link {
     color: $blue;
+    font-size: .9rem;
   }
   .bold {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 1.1rem;
   }
 }
 </style>
