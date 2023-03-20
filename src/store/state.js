@@ -6,6 +6,10 @@ export default {
   address: {}, // 地址相关信息
   foodType: [], // 食品相关分类
   shops: [], // 商家数组
-  userInfo: {} // 用户信息
+  userInfo: {}, // 用户信息
+  shopId: 0, // 店铺id
+  goods: [], // 食物目录
+  ratings: [], // 评分
+  info: {} // 商家信息
 
 }

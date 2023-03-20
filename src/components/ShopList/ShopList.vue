@@ -11,7 +11,7 @@
 
     </ul>
     <ul >
-      <router-link to="#" class="shop-li" v-for="item in shopList" :key="item.id">
+      <router-link :to="{name:'shop',query:{id:item.id}}" class="shop-li" v-for="item in shopList" :key="item.id">
         <div class="li-left">
           <span v-if="item.is_premium" class="premium">品牌</span>
 
@@ -52,17 +52,19 @@ import { getShopList } from '@/api/getData'
 import { computed, onMounted, ref, getCurrentInstance } from 'vue'
 import { useStore } from 'vuex'
 const currentInstance = getCurrentInstance()
-
 const imgBaseUrl = '//elm.cangdu.org/img/'
 const store = useStore()
 const useState = computed(() => {
   const latitude = store.state.latitude
   const longitude = store.state.longitude
+  const geohash = store.state.geohash
   return {
     latitude,
-    longitude
+    longitude,
+    geohash
   }
 })
+
 let limit = 20 // 一次获取20条数据
 const shopList = ref([]) // 店铺列表
 const blue = ref(4)
@@ -103,6 +105,7 @@ const initList = async () => {
   })
 
   shopList.value = data
+  store.state.shops = shopList
 }
 
 const loadMore = async () => {

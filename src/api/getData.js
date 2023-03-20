@@ -1,4 +1,5 @@
 import request from './request.js'
+export const imgBaseUrl = '//elm.cangdu.org/img/'
 export const getLocalPosition = (type) => {
   return request({
     method: 'get',
@@ -29,6 +30,31 @@ export const getShopList = (params) => {
     method: 'get',
     url: 'shopping/restaurants',
     data: params
+  })
+}
+
+// 获取食物目录
+export const getGoods = () => {
+  return request({
+    method: 'get',
+    url: 'shopping/v2/restaurant/category'
+
+  })
+}
+
+// 获取店铺评价
+export const getRatings = (params) => {
+  return request({
+    method: 'get',
+    url: `ugc/v2/restaurants/${params.restaurant_id}`
+
+  })
+}
+export const getInfo = (params) => {
+  return request({
+    method: 'get',
+    url: `shopping/restaurant/${params}`
+
   })
 }
 

@@ -70,6 +70,7 @@ const routes = [
   {
     path: '/shop',
     name: 'shop',
+    redirect: '/shop/shopgoods',
     component: Shop,
     children: [{
       path: 'shopgoods',

@@ -2,13 +2,20 @@ import {
   RECEIVE_CITY,
   RECEIVE_ADDRESS,
   RECEIVE_FOODTYPE,
-  RECEIVE_SHOPS
+  RECEIVE_SHOPS,
+  RECEIVE_GOODS,
+  RECEIVE_RATINGS,
+  RECEIVE_INFO
 } from './mutation-types'
 import {
   getAddress,
   getFoodTypes,
   getShopList,
-  getLocalPosition
+  getLocalPosition,
+  getGoods,
+  getRatings,
+  getInfo
+
 } from '../api/getData'
 
 export default {
@@ -45,6 +52,34 @@ export default {
     if (result.code === 0) {
       const address = result.data
       commit(RECEIVE_SHOPS, { address })
+    }
+  },
+  // 异步获取食物
+  async getShopGoods ({ commit }) {
+    const { data } = await getGoods()
+    console.log(data, 'food')
+    if (data) {
+      const goods = data
+      commit(RECEIVE_GOODS, { goods })
+    }
+  },
+  // 异步获取评价
+  async getShopRatings ({ commit, state }) {
+    console.log(state.shops)
+    const result = await getRatings(state)
+    if (result.code === 0) {
+      const ratings = result.data
+      commit(RECEIVE_RATINGS, ratings)
+    }
+  },
+  // 异步获取商家信息
+  async getShopInfo ({ commit, state }) {
+    const shopid = state.shopId
+    console.log(shopid, 'id')
+    const { data } = await getInfo(shopid)
+    if (data) {
+      const info = data
+      commit(RECEIVE_INFO, { info })
     }
   }
 
