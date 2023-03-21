@@ -55,9 +55,10 @@ export default {
     }
   },
   // 异步获取食物
-  async getShopGoods ({ commit }) {
-    const { data } = await getGoods()
-    console.log(data, 'food')
+  async getShopGoods ({ commit, state }) {
+    const restaurantId = state.shopId
+    const { data } = await getGoods({ restaurant_id: restaurantId })
+
     if (data) {
       const goods = data
       commit(RECEIVE_GOODS, { goods })

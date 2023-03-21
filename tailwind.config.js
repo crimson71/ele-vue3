@@ -4,7 +4,10 @@ module.exports = {
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   content: [],
   theme: {
-    extend: {}
+    extend: {},
+    fontSize: {
+      xs: '.5rem'
+    }
   },
   plugins: []
 }

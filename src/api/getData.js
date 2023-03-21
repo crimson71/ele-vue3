@@ -34,10 +34,11 @@ export const getShopList = (params) => {
 }
 
 // 获取食物目录
-export const getGoods = () => {
+export const getGoods = (params) => {
   return request({
     method: 'get',
-    url: 'shopping/v2/restaurant/category'
+    url: 'shopping/v2/menu',
+    data: params
 
   })
 }

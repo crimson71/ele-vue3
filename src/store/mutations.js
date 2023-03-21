@@ -29,7 +29,7 @@ export default {
     state.userInfo = userInfo
   },
   [RECEIVE_GOODS] (state, { goods }) {
-    state.goods = goods
+    state.goodsMenu = goods
   },
   [RECEIVE_RATINGS] (state, { ratings }) {
     state.ratings = ratings
