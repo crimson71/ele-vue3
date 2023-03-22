@@ -49,9 +49,10 @@ export default {
   async getShopList ({ commit, state }) {
     const { longtitude, latitude } = state
     const result = await getShopList(longtitude, latitude)
+    console.log(result, 'shops')
     if (result.code === 0) {
-      const address = result.data
-      commit(RECEIVE_SHOPS, { address })
+      const shops = result.data
+      commit(RECEIVE_SHOPS, { shops })
     }
   },
   // 异步获取食物
@@ -60,7 +61,7 @@ export default {
     const { data } = await getGoods({ restaurant_id: restaurantId })
 
     if (data) {
-      const goods = data
+      const goods = data.data
       commit(RECEIVE_GOODS, { goods })
     }
   },

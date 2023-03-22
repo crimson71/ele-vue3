@@ -1,0 +1,91 @@
+{
+  "name": "亮晶晶燕窝",
+  "address": "河北省石家庄市井陉县307国道与202省道",
+  "id": 3329,
+  "latitude": 38.007697,
+  "longitude": 114.10793,
+  "location": [
+      121.48275,
+      31.245287
+  ],
+  "phone": "666666666",
+  "category": "小吃夜宵/烧烤",
+  "supports": [
+      {
+          "description": "已加入“外卖保”计划，食品安全有保障",
+          "icon_color": "999999",
+          "icon_name": "保",
+          "id": 7,
+          "name": "外卖保",
+          "_id": "5c04d83c777a205b1afd178f"
+      },
+      {
+          "description": "准时必达，超时秒赔",
+          "icon_color": "57A9FF",
+          "icon_name": "准",
+          "id": 9,
+          "name": "准时达",
+          "_id": "5c04d83c777a205b1afd178e"
+      },
+      {
+          "description": "该商家支持开发票，请在下单时填写好发票抬头",
+          "icon_color": "999999",
+          "icon_name": "票",
+          "id": 4,
+          "name": "开发票",
+          "_id": "5c04d83c777a205b1afd178d"
+      }
+  ],
+  "status": 1,
+  "recent_order_num": 10,
+  "rating_count": 31,
+  "rating": 4.4,
+  "promotion_info": "213",
+  "piecewise_agent_fee": {
+      "tips": "配送费约¥5"
+  },
+  "opening_hours": [
+      "8:30/20:30"
+  ],
+  "license": {
+      "catering_service_license_image": "16772ecb68923159.jpg",
+      "business_license_image": "16772ec9c5a23158.jpg"
+  },
+  "is_new": true,
+  "is_premium": true,
+  "image_path": "183cb1c2cdd109210.png",
+  "identification": {
+      "registered_number": "",
+      "registered_address": "",
+      "operation_period": "",
+      "licenses_scope": "",
+      "licenses_number": "",
+      "licenses_date": "",
+      "legal_person": "",
+      "identificate_date": null,
+      "identificate_agency": "",
+      "company_name": ""
+  },
+  "float_minimum_order_amount": 20,
+  "float_delivery_fee": 5,
+  "distance": "",
+  "order_lead_time": "",
+  "description": "伊南亲自上山采摘",
+  "delivery_mode": {
+      "color": "57A9FF",
+      "id": 1,
+      "is_solid": true,
+      "text": "蜂鸟专送"
+  },
+  "activities": [
+      {
+          "icon_name": "减",
+          "name": "满减优惠",
+          "description": "满30减5，满60减8",
+          "icon_color": "f07373",
+          "id": 1,
+          "_id": "5c04d83c777a205b1afd1790"
+      }
+  ],
+  "__v": 0
+}

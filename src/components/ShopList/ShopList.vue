@@ -1,6 +1,6 @@
 <template>
   <div class="shoplist-container" ref='shoplist'>
-    <button @click="loadMore">加载更多</button>
+
     <ul class="select-shop" :class="{'list-fixed' : ListFixed}" >
       <li class="ellipsis" :class="{'blue':blue === 4}"  @click="orderShop(4)"> 智能排序(默认)</li>
       <li :class="{'blue':blue === 1}" @click="orderShop(1)"> 起送价</li>
@@ -49,9 +49,9 @@
 <script setup>
 import RatingStar from '@/components/RatingStar.vue'
 import { getShopList } from '@/api/getData'
-import { computed, onMounted, ref, getCurrentInstance } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
-const currentInstance = getCurrentInstance()
+// const currentInstance = getCurrentInstance()
 const imgBaseUrl = '//elm.cangdu.org/img/'
 const store = useStore()
 const useState = computed(() => {
@@ -65,12 +65,12 @@ const useState = computed(() => {
   }
 })
 
-let limit = 20 // 一次获取20条数据
+const limit = 20 // 一次获取20条数据
 const shopList = ref([]) // 店铺列表
 const blue = ref(4)
-const isLoading = ref(false)
-const loadingEnd = ref(false) // 没有更多数据
-const preventRepeatRequest = ref(false) // 防止重复请求数据
+// const isLoading = ref(false)
+// // const loadingEnd = ref(false) // 没有更多数据
+// const preventRepeatRequest = ref(false) // 防止重复请求数据
 
 // 店铺排序
 const orderShop = async (option) => {
@@ -103,44 +103,35 @@ const initList = async () => {
     latitude: useState.value.latitude,
     longitude: useState.value.longitude
   })
-
-  shopList.value = data
-  store.state.shops = shopList
+  shopList.value = data.data
+  store.state.shops = data.data
 }
 
-const loadMore = async () => {
-  if (loadingEnd.value) {
-    return
-  }
-  if (preventRepeatRequest.value) {
-    return
-  }
-  isLoading.value = true
-  limit += 20
-  const { data } = await getShopList({
-    limit: limit,
-    latitude: useState.value.latitude,
-    longitude: useState.value.longitude
-  })
-  if (data.length < 20) {
-    loadingEnd.value = true
-    return
-  }
-  shopList.value = [...data]
-  isLoading.value = false
-}
-const handleScroll = (dom) => {
-  console.log(dom)
-  const range = 80
-  if (dom.scrollHeight - (dom.clientHeight + dom.scrollTop) < range) {
-    console.log('到底了')
-    loadMore()
-  }
-}
+// const loadMore = async () => {
+//   if (loadingEnd.value) {
+//     return
+//   }
+//   if (preventRepeatRequest.value) {
+//     return
+//   }
+//   isLoading.value = true
+//   limit += 20
+//   const { data } = await getShopList({
+//     limit: limit,
+//     latitude: useState.value.latitude,
+//     longitude: useState.value.longitude
+//   })
+//   if (data.length < 20) {
+//     loadingEnd.value = true
+//     return
+//   }
+//   shopList.value = [...data]
+//   isLoading.value = false
+// }
+
 onMounted(() => {
   initList()
   setFixed()
-  window.addEventListener('touchmove', handleScroll(currentInstance.refs.shoplist))
 })
 </script>
 

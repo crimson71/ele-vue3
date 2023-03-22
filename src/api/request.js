@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const baseURL = 'https://elm.cangdu.org'
-// const baseURL = './api/'
+// const baseURL = 'http://localhost:8080/'
 
 const service = axios.create({
   baseURL: baseURL
