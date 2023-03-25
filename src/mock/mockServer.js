@@ -24,8 +24,6 @@ Mock.mock('/info', { code: 0, data: data.info })
 
 // 返回shopList接口
 Mock.mock(/shopping\/restaurants/, 'get', (options) => {
-  console.log(options)
-
   return {
     data: shopList,
     code: 0,
@@ -37,8 +35,6 @@ Mock.mock(/shopping\/restaurants/, 'get', (options) => {
 
 // 返回shopMenu接口
 Mock.mock(/shopping\/v2\/menu/, 'get', (options) => {
-  console.log(options)
-
   return {
     data: shopMenu,
     code: 0,

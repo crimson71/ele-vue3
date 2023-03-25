@@ -10,6 +10,7 @@ export default {
   shopId: 0, // 店铺id
   goodsMenu: [], // 食物目录
   ratings: [], // 评分
-  info: {} // 商家信息
+  info: {}, // 商家信息
+  cartFoods: []// 购物车商品
 
 }

@@ -46,7 +46,7 @@ const useState = computed(() => {
 })
 
 const goBack = () => {
-  router.go(-1)
+  router.push({ name: 'msite' })
 }
 </script>
 

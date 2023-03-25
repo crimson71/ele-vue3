@@ -1,3 +1,4 @@
+
 import {
   RECEIVE_CITY,
   RECEIVE_ADDRESS,
@@ -6,7 +7,9 @@ import {
   RECEIVE_USER_INFO,
   RECEIVE_GOODS,
   RECEIVE_RATINGS,
-  RECEIVE_INFO
+  RECEIVE_INFO,
+  RECEIVE_FOOD_DECREASE,
+  RECEIVE_FOOD_INCREASE
 
 } from './mutation-types'
 export default {
@@ -36,6 +39,22 @@ export default {
   },
   [RECEIVE_INFO] (state, { info }) {
     state.info = info
+  },
+  [RECEIVE_FOOD_DECREASE] (state, { food }) {
+    if (food.count) {
+      food.count--
+      if (food.count === 0) {
+        state.cartFoods.splice(state.cartFoods.indexOf(food), 1)
+      }
+    }
+  },
+  [RECEIVE_FOOD_INCREASE] (state, { food }) {
+    if (!food.count) {
+      Reflect.set(food, 'count', 1)
+      state.cartFoods.push(food)
+    } else {
+      food.count++
+    }
   }
 
 }

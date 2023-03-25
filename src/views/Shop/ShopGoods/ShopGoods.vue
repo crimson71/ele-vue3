@@ -16,51 +16,52 @@
 
     <div class="right-wrapper">
       <!-- 右侧分类 -->
-      <ul ref="rightUl">
-        <li v-for="item in useState.shopgoods" :key="item.id" class="right-li">
-          <!-- 右侧分类标题 -->
-          <div class="font-bold mb-1" style="font-size: 0.5rem">
-            {{ item.name }}
-            <span class="pl-1" style="color: #999">{{ item.description }}</span>
-          </div>
+      <ul ref="rightUl" class="rightUl">
+        <!-- 大类li -->
+        <li v-for="(item, index) in useState.shopgoods" :key="index" class="right-li">
           <ul>
-            <li v-for="(foodItem, index) in item.foods" :key="index">
+            <!-- 详细商品 -->
+            <li class="h-4 leading-4 text-base mb-2 font-bold" style="font-size: 0.6rem;">
+              {{ item.name }}
+              <span class="pl-1 text-xs text-gray-500">{{ item.description }}</span>
+            </li>
+            <li v-for="(foodItem, index) in item.foods" :key="index" @click="showFoodDetail(foodItem)">
+              <div class="food-img-wrapper">
+                <img :src="imgBaseUrl" alt="" />
+              </div>
               <div class="food-info">
-                <img
-                  class="food-img"
-                  :src="imgBaseUrl + foodItem.image_path"
-                  alt=""
-                />
-                <div class="food-desc">
-                  <h5 class="food-name font-bold" style="font-size: 0.7rem">
-                    {{ foodItem.name }}
-                  </h5>
-                  <p class="desc mt-1.5" style="color: #999; font-size: 0.5rem">
-                    {{ foodItem.description }}
+                <p class="food-name">
+                  {{ foodItem.name }}
+                </p>
+                <p class="ellipsis text-gray-500 text-xs">{{ foodItem.description }}</p>
+                <p class="text-gray-500 text-xs">{{foodItem.tips}}</p>
+                <div class="flex justify-between">
+                  <p class="text-orange-600 price">
+                  ￥{{ foodItem.price }}
                   </p>
-                  <p style="color: #999; font-size: 0.5rem" class="mt-1">
-                    {{ foodItem.tips }}
-
-                  </p>
+                  <cart-count :food="foodItem"/>
 
                 </div>
 
               </div>
             </li>
           </ul>
-          <cart-count class="cart-count"></cart-count>
         </li>
       </ul>
     </div>
+    <FoodDetail :food=" food" ref="foodDetail"/>
   </div>
 </template>
 
 <script setup>
 import { computed, nextTick, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
-import { imgBaseUrl } from '@/api/getData'
 import BScroll from '@better-scroll/core'
 import CartCount from '@/components/CartCount/CartCount.vue'
+import FoodDetail from '@/components/Food/FoodDetail.vue'
+// import imgBaseUrl from '@/assets/images/'
+
+const imgBaseUrl = require('@/static/images/1.png')
 
 const store = useStore()
 const useState = computed(() => {
@@ -110,7 +111,7 @@ const initTops = () => {
     top += li.clientHeight
     tops.value.push(top)
   })
-  console.log(tops.value)
+  console.log(tops.value, 'tops')
 }
 // 查找当前右侧li下标
 const currentIndex = computed(() => {
@@ -128,6 +129,16 @@ const clickLeftMenu = (index) => {
   bsRight.value.scrollTo(0, scrollY.value, 300)
   console.log(index)
 }
+
+// 显示商品详情
+const food = ref()
+const foodDetail = ref()
+const showFoodDetail = (foodItem) => {
+  food.value = foodItem
+  foodDetail.value.toggleShow()
+  console.log(foodDetail, 'foodDeatail')
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -136,10 +147,10 @@ const clickLeftMenu = (index) => {
 .shop-goods-container {
   position: relative;
   display: flex;
-   .current {
-   color: $blue !important;
-  background: #fff;
-}
+  .current {
+    color: $blue !important;
+    background: #fff;
+  }
   .left-wrapper {
     width: 25%;
     height: 100vh;
@@ -152,10 +163,10 @@ const clickLeftMenu = (index) => {
       justify-content: space-between;
 
       li {
-        @include sc(0.5rem, #999);
-        padding: 0.5rem;
+        @include sc(0.5rem, #444);
         height: 2.75rem;
-        line-height: 2.75rem;
+        padding: 0.5rem;
+
         text-align: center;
       }
     }
@@ -164,22 +175,36 @@ const clickLeftMenu = (index) => {
     width: 75%;
     height: 100vh;
     overflow: hidden;
-
-    ul {
+    .rightUl {
       li {
         ul {
           li {
-            .food-info {
-              display: flex;
+            display: flex;
+            .food-img-wrapper {
+              width: 33%;
+              @include wh(6rem, 6rem);
               .food-img {
-                @include wh(33%, 100%);
-                margin-right: 0.6rem;
+                @include wh(4rem, 4rem);
+                @include borderRadius(5px);
               }
             }
-            .cart-count {
-              position: absolute;
-              right: 0;
-              bottom: 0;
+            .food-info {
+              width: 67%;
+              padding: 0 5px;
+              .food-name {
+                font-size: 0.7rem;
+                color: #191919;
+                font-weight: 700;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+              }
+              .price {
+                @include font(.8rem,.8rem)
+              }
             }
           }
         }

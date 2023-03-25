@@ -1,30 +1,71 @@
 <template>
-  <div class="cart-container">
-    <div class="price">￥123</div>
-    <div class="add">
-      <svg-icon name="add"></svg-icon>
-    </div>
+  <div class="cart-container ml-4">
+    <transition name="move">
+      <svg-icon
+        name="decrease"
+        class="decrease icon-entry-remove"
+        style="width: 0.8rem; height: 0.8rem"
+        @click="handleCount(false)"
+        v-if="props.food.count"
+      />
+    </transition>
+
+    <span class="text-sm" v-if="props.food.count">{{ props.food.count }}</span>
+
+    <svg-icon
+      name="add"
+      class="increase"
+      style="width: 0.8rem; height: 0.8rem"
+      @click="handleCount(true)"
+    />
   </div>
 </template>
 
 <script setup>
-// import { computed } from 'vue'
-// import { mapState, useStore } from 'vuex'
-// const store = useStore()
-// const useState = computed(() => {
-//   mapState.goodsMenu
-//   return {
-//     goodsMenu
-//   }
-// })
+import { defineProps } from 'vue'
+import { useStore } from 'vuex'
+const store = useStore()
+const props = defineProps({
+  food: Object
+})
+
+// 购物车按钮点击事件
+const handleCount = (isAdd) => {
+  store.dispatch('updateFoodCount', { isAdd, food: props.food })
+}
 </script>
 
 <style lang="scss" scoped>
+@import '../../common/sass/mixin.scss';
 .cart-container {
-  width: 100%;
+  position: relative;
+  height: 1.5rem;
+  width: 5rem;
   display: flex;
-  padding: 0 0.8rem;
-  padding-left: 3rem;
-}
+ .move-enter-active,
+ .move-leave-active{
+  transition: all .3s ease;
+ }
+ .move-enter,
+ .move-leave-to {
+  opacity: 0;
+  transform: translateX(-15px) rotate(180deg) ;
+ }
 
+  span {
+    display: inline-block;
+    width: 1.25rem;
+    text-align: center;
+  }
+
+  .decrease,
+  .increase {
+    margin-top: 0.25rem;
+    fill: $blue;
+  }
+  .increase {
+    position: absolute;
+    right: .8rem;
+  }
+}
 </style>

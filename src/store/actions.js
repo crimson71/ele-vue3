@@ -5,7 +5,9 @@ import {
   RECEIVE_SHOPS,
   RECEIVE_GOODS,
   RECEIVE_RATINGS,
-  RECEIVE_INFO
+  RECEIVE_INFO,
+  RECEIVE_FOOD_INCREASE,
+  RECEIVE_FOOD_DECREASE
 } from './mutation-types'
 import {
   getAddress,
@@ -82,6 +84,14 @@ export default {
     if (data) {
       const info = data
       commit(RECEIVE_INFO, { info })
+    }
+  },
+  // 更新购物车数量
+  updateFoodCount ({ commit }, { isAdd, food }) {
+    if (isAdd) {
+      commit(RECEIVE_FOOD_INCREASE, { food })
+    } else {
+      commit(RECEIVE_FOOD_DECREASE, { food })
     }
   }
 

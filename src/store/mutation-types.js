@@ -8,3 +8,5 @@ export const RECEIVE_USER_INFO = 'receuve_user_info' // 接收用户信息
 export const RECEIVE_GOODS = 'receive__goods' // 接收食物目录
 export const RECEIVE_RATINGS = 'receive__ratings' // 接收商家评价
 export const RECEIVE_INFO = 'receive__info' // 接收商家信息
+export const RECEIVE_FOOD_DECREASE = 'receive_food_decrease' // 减少购物车数量
+export const RECEIVE_FOOD_INCREASE = 'receive_food_increase'// 增加购物车数量
