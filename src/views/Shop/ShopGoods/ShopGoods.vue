@@ -39,7 +39,7 @@
                   <p class="text-orange-600 price">
                   ￥{{ foodItem.price }}
                   </p>
-                  <cart-count :food="foodItem"/>
+                  <CartCount :food="foodItem" ref="cartCount" @add-cart="drop"/>
 
                 </div>
 
@@ -49,7 +49,23 @@
         </li>
       </ul>
     </div>
-    <FoodDetail :food=" food" ref="foodDetail"/>
+    <FoodDetail :food=" food" ref="foodDetail" class="food-detail"/>
+    <ShopCart ref="shopCart" class="shop-cart" />
+    <div class="ball-container">
+      <div v-for="(item,index) in balls" :key="index">
+        <transition
+        @before-enter="handleBeforEnter"
+        @enter="handleEnter"
+        @after-enter="handleAfterEnter"
+        name="drop">
+        <div class="ball" v-show="item.show">
+          <div class="inner inner-hook"></div>
+
+        </div>
+
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -59,10 +75,11 @@ import { useStore } from 'vuex'
 import BScroll from '@better-scroll/core'
 import CartCount from '@/components/CartCount/CartCount.vue'
 import FoodDetail from '@/components/Food/FoodDetail.vue'
+import ShopCart from '@/components/ShopCart/ShopCart.vue'
 // import imgBaseUrl from '@/assets/images/'
 
 const imgBaseUrl = require('@/static/images/1.png')
-
+// const { proxy } = getCurrentInstance()
 const store = useStore()
 const useState = computed(() => {
   const shopgoods = store.state.goodsMenu
@@ -139,6 +156,70 @@ const showFoodDetail = (foodItem) => {
   console.log(foodDetail, 'foodDeatail')
 }
 
+// 添加购物车动画
+const balls = ref([{ show: false }, { show: false }, { show: false }, { show: false }, { show: false }])
+const dropBalls = ref([])
+const drop = (el) => {
+  console.log(el)
+
+  for (let i = 0; i < balls.value.length; i++) {
+    const ball = balls.value[i]
+    if (!ball.show) {
+      ball.show = true
+      ball.el = el
+      dropBalls.value.push(ball)
+      return
+    }
+  }
+}
+
+const handleBeforEnter = (el) => {
+  let count = balls.value.length
+  while (count--) {
+    const ball = balls.value[count]
+    console.log(ball.el)
+    if (ball.show) {
+      //  getBoundingClientRect()获取小球相对于视窗的位置，屏幕左上角坐标为0，0
+      const rect = ball.el.getBoundingClientRect()
+      // 小球x方向位移= 小球距离屏幕左侧的距离-外层盒子距离水平的距离
+      const x = rect.left + 32
+      // 负数，因为是从左上角向下
+      const y = -(window.innerHeight - rect.top - 22)
+      el.style.display = 'block'
+      el.style.webkitTransform = `translate3d(0,${y}px,0)`
+      el.style.transform = `translate3d(0,${y}px,0)`
+      // 获取内层盒子
+      const inner = el.getElementsByClassName('inner-hook')[0]
+      // 设置内层盒子，即小球水平方向的距离
+      inner.style.webkitTransform = `translate3d(${x}px,0,0)`
+      inner.style.transform = `translate3d(${x}px,0,0)`
+    }
+  }
+}
+const handleEnter = (el, done) => {
+  // const rf = el.offsetHeight
+  nextTick(() => {
+    el.style.webkitTransform = 'translate3d(0, 0, 0)'
+    el.style.transform = 'translate3d(0, 0, 0)'
+    const inner = el.getElementsByClassName('inner-hook')[0]
+    inner.style.webkitTransform = 'translate3d(0, 0, 0)'
+    inner.style.transform = 'translate3d(0, 0, 0)'
+    // Vue为了知道过渡的完成，必须设置相应的事件监听器。
+    // 如果没有这一句那将不会执行handleAfterEnter
+    el.addEventListener('transitionend', done)
+  })
+}
+const handleAfterEnter = (el) => {
+  // 完成一次动画就删除一个dropBalls的小球
+  const ball = dropBalls.value.shift()
+  if (ball) {
+    ball.show = false
+    // 如果没有这一句，小球到达终点后过一小段时间后才消失
+    // 具体原因也是搞不清楚，上面也已经false掉了
+    el.style.display = 'none'
+  }
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -147,6 +228,9 @@ const showFoodDetail = (foodItem) => {
 .shop-goods-container {
   position: relative;
   display: flex;
+  .food-detail {
+    @include allcover;
+  }
   .current {
     color: $blue !important;
     background: #fff;
@@ -181,6 +265,7 @@ const showFoodDetail = (foodItem) => {
           li {
             display: flex;
             .food-img-wrapper {
+              position: relative;
               width: 33%;
               @include wh(6rem, 6rem);
               .food-img {
@@ -210,6 +295,32 @@ const showFoodDetail = (foodItem) => {
         }
       }
     }
+  }
+  .shop-cart {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+  .ball-container {
+    .ball {
+       position: fixed ;
+       left: 32px;
+       bottom: 22px;
+       z-index: 999;
+       .drop-enter-active,
+       .drop-leave-active {
+        transition: all .8s cubic-bezier(0.49,-0.49,0.75,0.41)
+       }
+       .inner {
+         width: 16px;
+           height: 16px;
+           border-radius: 50%;
+           background: rgb(0,160,220);
+           transition: all .8s;
+       }
+
+    }
+
   }
 }
 </style>

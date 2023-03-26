@@ -5,7 +5,7 @@
         name="decrease"
         class="decrease icon-entry-remove"
         style="width: 0.8rem; height: 0.8rem"
-        @click="handleCount(false)"
+        @click.stop="handleCount(false)"
         v-if="props.food.count"
       />
     </transition>
@@ -13,26 +13,35 @@
     <span class="text-sm" v-if="props.food.count">{{ props.food.count }}</span>
 
     <svg-icon
+
       name="add"
       class="increase"
+      ref="addIcon"
       style="width: 0.8rem; height: 0.8rem"
-      @click="handleCount(true)"
+      @click.stop="handleCount(true,$event)"
     />
+
   </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, getCurrentInstance } from 'vue'
 import { useStore } from 'vuex'
+const { proxy } = getCurrentInstance()
 const store = useStore()
 const props = defineProps({
   food: Object
 })
 
 // 购物车按钮点击事件
-const handleCount = (isAdd) => {
+
+const handleCount = (isAdd, event) => {
   store.dispatch('updateFoodCount', { isAdd, food: props.food })
+  if (isAdd) {
+    proxy.$emit('add-cart', event.target)
+  }
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -67,5 +76,6 @@ const handleCount = (isAdd) => {
     position: absolute;
     right: .8rem;
   }
+
 }
 </style>
