@@ -11,6 +11,23 @@ export default {
   goodsMenu: [], // 食物目录
   ratings: [], // 评分
   info: {}, // 商家信息
-  cartFoods: [] // 购物车商品
+  cartFoods: [], // 购物车商品
+  balls: [{
+    show: false
+  },
+  {
+    show: false
+  },
+  {
+    show: false
+  },
+  {
+    show: false
+  },
+  {
+    show: false
+  }
+  ],
+  dropBall: [] // 购物车小球
 
 }

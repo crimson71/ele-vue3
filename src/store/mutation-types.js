@@ -10,3 +10,5 @@ export const RECEIVE_RATINGS = 'receive__ratings' // 接收商家评价
 export const RECEIVE_INFO = 'receive__info' // 接收商家信息
 export const RECEIVE_FOOD_DECREASE = 'receive_food_decrease' // 减少购物车数量
 export const RECEIVE_FOOD_INCREASE = 'receive_food_increase'// 增加购物车数量
+export const BALL_CHANGE_SHOW = 'ball_change_show' // 改變小球的顯示
+export const CHANGE_DROP_BALL = 'change_drop_ball'

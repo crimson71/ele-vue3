@@ -7,7 +7,10 @@ import {
   RECEIVE_RATINGS,
   RECEIVE_INFO,
   RECEIVE_FOOD_INCREASE,
-  RECEIVE_FOOD_DECREASE
+  RECEIVE_FOOD_DECREASE,
+  CHANGE_DROP_BALL,
+  BALL_CHANGE_SHOW
+
 } from './mutation-types'
 import {
   getAddress,
@@ -93,6 +96,14 @@ export default {
     } else {
       commit(RECEIVE_FOOD_DECREASE, { food })
     }
+  },
+  // 同步更新購物車小球狀態
+  changeBallShow ({ commit }, ballState) {
+    const { index, isShow, el } = ballState
+    commit(BALL_CHANGE_SHOW, { index, isShow, el })
+  },
+  changeDropBall ({ commit }, ball) {
+    commit(CHANGE_DROP_BALL, ball)
   }
 
 }

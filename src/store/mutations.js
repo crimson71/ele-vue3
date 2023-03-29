@@ -9,7 +9,9 @@ import {
   RECEIVE_RATINGS,
   RECEIVE_INFO,
   RECEIVE_FOOD_DECREASE,
-  RECEIVE_FOOD_INCREASE
+  RECEIVE_FOOD_INCREASE,
+  BALL_CHANGE_SHOW,
+  CHANGE_DROP_BALL
 
 } from './mutation-types'
 export default {
@@ -55,6 +57,13 @@ export default {
     } else {
       food.count++
     }
+  },
+  [BALL_CHANGE_SHOW] (state, { index, isShow, el }) {
+    state.balls[index].show = isShow
+    state.balls[index].el = el
+  },
+  [CHANGE_DROP_BALL] (state, ball) {
+    state.dropBall.push(ball)
   }
 
 }

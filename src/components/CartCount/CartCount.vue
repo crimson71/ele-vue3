@@ -10,7 +10,7 @@
       />
     </transition>
 
-    <span class="text-sm" v-if="props.food.count">{{ props.food.count }}</span>
+    <span class="count" v-if="props.food.count">{{ props.food.count }}</span>
 
     <svg-icon
 
@@ -25,20 +25,42 @@
 </template>
 
 <script setup>
-import { defineProps, getCurrentInstance } from 'vue'
+import { computed, defineProps } from 'vue'
 import { useStore } from 'vuex'
-const { proxy } = getCurrentInstance()
+
 const store = useStore()
 const props = defineProps({
-  food: Object
+  food: {
+    type: Object,
+    default () {
+      return {}
+    }
+
+  }
 })
 
 // 购物车按钮点击事件
-
 const handleCount = (isAdd, event) => {
   store.dispatch('updateFoodCount', { isAdd, food: props.food })
   if (isAdd) {
-    proxy.$emit('add-cart', event.target)
+    addCart(event)
+  }
+}
+
+// 點擊購物車小球掉落
+const useState = computed(() => {
+  const balls = store.state.balls
+  return {
+    balls
+  }
+})
+const addCart = (event) => {
+  for (let i = 0; i < useState.value.balls.length; i++) {
+    if (!useState.value.balls[i].show) {
+      store.dispatch('changeBallShow', { index: i, isShow: true, el: event.target })
+      store.dispatch('changeDropBall', useState.value.balls[i])
+      return
+    }
   }
 }
 
@@ -51,6 +73,12 @@ const handleCount = (isAdd, event) => {
   height: 1.5rem;
   width: 5rem;
   display: flex;
+  .count {
+    display: inline-block;
+
+    margin: 0 .25rem;
+    font-size: 0.7rem;
+  }
  .move-enter-active,
  .move-leave-active{
   transition: all .3s ease;
@@ -74,7 +102,7 @@ const handleCount = (isAdd, event) => {
   }
   .increase {
     position: absolute;
-    right: .8rem;
+    right: .6rem;
   }
 
 }
