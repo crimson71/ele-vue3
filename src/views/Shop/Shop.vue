@@ -54,6 +54,8 @@ store.state.shopId = shopId
 onBeforeMount(() => {
   store.dispatch('getShopInfo')
   store.dispatch('getShopGoods')
+  store.dispatch('getshopScore')
+  store.dispatch('getRatingTags')
 })
 </script>
 

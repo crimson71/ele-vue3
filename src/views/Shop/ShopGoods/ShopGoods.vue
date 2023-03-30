@@ -127,7 +127,7 @@ const initTops = () => {
   let top = 0
   tops.value.push(top)
   const rightLis = rightUl.value.getElementsByClassName('right-li')
-  Array.prototype.slice.call(rightLis).forEach((li) => {
+  Array.from(rightLis).forEach((li) => {
     top += li.clientHeight
     tops.value.push(top)
   })

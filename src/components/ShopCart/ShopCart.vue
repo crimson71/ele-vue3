@@ -1,54 +1,60 @@
 <template>
   <div class="shopcart-container">
-    <div class="shopcart-list">
-      <div class="list-header">
-        <h1>已选商品</h1>
-        <span class="clear">
-          <svg-icon
-            name="clear"
-            class="clear-icon"
-            style="width: 0.7rem; height: 0.7rem"
-          ></svg-icon>
-          清空</span
-        >
-      </div>
-      <div class="list-content">
-        <ul>
-          <li v-for="(item,index) in useState.cartFoods" :key="index">
-            <img :src="imgBaseUrl" alt="" />
-            <div class="list-right">
-              <h4 class="food-name">{{item.name }}</h4>
-              <div class="food-info">
-                <div class="food-price">￥{{item.price}}</div>
-                <cart-count :food="item"></cart-count>
+    <div class="cart-mask" v-if="listShow" @click="handleListShow"></div>
+    <Transition name="move">
+      <div class="shopcart-list" v-if="listShow">
+        <div class="list-header">
+          <h1>已选商品</h1>
+          <span class="clear" @click="clearShopCart">
+            <svg-icon
+              name="clear"
+              class="clear-icon"
+              style="width: 0.7rem; height: 0.7rem"
+            ></svg-icon>
+            清空</span
+          >
+        </div>
+        <div class="list-content">
+          <ul>
+            <li v-for="(item, index) in useState.cartFoods" :key="index">
+              <img :src="imgBaseUrl" alt="" />
+              <div class="list-right">
+                <h4 class="food-name">{{ item.name }}</h4>
+                <div class="food-info">
+                  <div class="food-price">￥{{ item.price }}</div>
+                  <cart-count :food="item"></cart-count>
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </Transition>
     <div class="shopcart-main">
-      <div class="img-wrapper" id="cart-img">
-        <div>
-          <img
-            src="../../assets/images/shopcart.png"
-            v-if="!useGetter.totalCount"
-          />
-          <img src="../../assets/images/shopcartactive.png" v-else />
-        </div>
+      <div class="main-left" @click="handleListShow">
+        <div class="img-wrapper" id="cart-img">
+          <div>
+            <img
+              src="../../assets/images/shopcart.png"
+              v-if="!useGetter.totalCount"
+            />
+            <img src="../../assets/images/shopcartactive.png" v-else />
+          </div>
 
-        <div class="total-count" v-if="useGetter.totalCount">
-          {{ useGetter.totalCount }}
+          <div class="total-count" v-if="useGetter.totalCount">
+            {{ useGetter.totalCount }}
+          </div>
+        </div>
+        <div class="count">
+          <p class="price">
+            <span class="text-xs">￥</span>{{ useGetter.totalPrice }}
+          </p>
+          <p class="text-grey-500 text-xs">
+            配送费￥{{ useState.shopInfo.float_delivery_fee }}
+          </p>
         </div>
       </div>
-      <div class="count">
-        <p class="price">
-          <span class="text-xs">￥</span>{{ useGetter.totalPrice }}
-        </p>
-        <p class="text-grey-500 text-xs">
-          配送费￥{{ useState.shopInfo.float_delivery_fee }}
-        </p>
-      </div>
+
       <div class="count-btn">
         <button :class="btnClass">{{ btnTxt }}</button>
       </div>
@@ -73,9 +79,11 @@
 </template>
 
 <script setup>
-import { computed, nextTick } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { useStore } from 'vuex'
 import CartCount from '@/components/CartCount/CartCount.vue'
+import BScroll from '@better-scroll/core'
+import { ElMessageBox } from 'element-plus'
 const imgBaseUrl = require('@/static/images/1.png')
 const store = useStore()
 const useGetter = computed(() => {
@@ -152,21 +160,96 @@ const afterEnter = (el) => {
     el.style.display = 'none'
   }
 }
+
+// 控制购物车列表的显示
+const bs = ref()
+const listShow = computed(() => {
+  if (useGetter.value.totalCount === 0) {
+    return false
+  }
+  if (isShow.value) {
+    nextTick(() => {
+      if (!bs.value) {
+        bs.value = new BScroll('.list-content', {
+          click: true
+        })
+      } else {
+        bs.value.refresh()
+      }
+    })
+  }
+  return isShow.value
+})
+const isShow = ref(false)
+const handleListShow = () => {
+  isShow.value = !isShow.value
+}
+
+// 清空购物车
+const clearShopCart = () => {
+  ElMessageBox.confirm(
+    '清空购物车',
+
+    {
+      confirmButtonText: '清空',
+      cancelButtonText: '取消',
+      type: 'warning',
+      center: true,
+      customStyle: 'font-weight:700'
+    }
+  )
+    .then(() => {
+      store.dispatch('clearCart')
+    })
+    .catch(() => {
+
+    })
+}
 </script>
 
 <style lang="scss" scoped>
 @import '../../common/sass/mixin.scss';
-.shopcart-container {
-  width: 100%;
 
-  background: #fff;
+.shopcart-container {
+  position: relative;
+  width: 100%;
+  height: 100hv;
   box-shadow: 10px 0 10px #ccc;
-  .shopcart-list {
+  .cart-mask {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    background: rgba($color: #000000, $alpha: 0.5);
     width: 100%;
+    height: 100%;
+    z-index: -100;
+  }
+
+  .shopcart-list {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    background: #fff;
     padding: 0.8rem 0.8rem;
+    transform: translateY(-100%);
+
+    &.move-enter-active,
+    &.move-leave-active {
+      transition: transform 0.3s;
+    }
+    &.move-enter-from,
+    &.move-leave-to {
+      transform: translateY(0);
+    }
+
     .list-header {
       display: flex;
       justify-content: space-between;
+
       h1 {
         font-size: 0.7rem;
         font-weight: 700;
@@ -182,6 +265,8 @@ const afterEnter = (el) => {
       }
     }
     .list-content {
+      max-height: 10rem;
+      overflow: hidden;
       ul {
         li {
           display: flex;
@@ -190,7 +275,7 @@ const afterEnter = (el) => {
           img {
             width: 25%;
             height: 100%;
-            @include borderRadius(5px)
+            @include borderRadius(5px);
           }
           .list-right {
             margin-left: 1rem;
@@ -199,21 +284,19 @@ const afterEnter = (el) => {
             justify-content: space-between;
             width: 75%;
             .food-name {
-              font-size: .7rem;
+              font-size: 0.7rem;
               font-weight: 700;
               margin-bottom: 1rem;
             }
             .food-info {
-              vertical-align:bottom;
+              vertical-align: bottom;
 
               display: flex;
               justify-content: space-between;
               .food-price {
                 color: red;
-                font-size: .5rem;
-
+                font-size: 0.5rem;
               }
-
             }
           }
         }
@@ -222,36 +305,42 @@ const afterEnter = (el) => {
   }
   .shopcart-main {
     display: flex;
-
+    background: #fff;
     height: 3.1rem;
-    .img-wrapper {
-      position: relative;
-      img {
-        @include wh(2.8rem, 2.8rem);
-      }
-      .total-count {
-        position: absolute;
-        padding: 0 0.02rem;
-        line-height: 0.8rem;
-        text-align: center;
-        top: 1rem;
-        right: 0.2rem;
-        min-width: 0.8rem;
-        height: 0.8rem;
-        border-radius: 0.8rem;
-        background: #ff4b33;
-        @include sc(0.5rem, #fff);
-      }
-    }
-    .count {
-      width: 60%;
+    .main-left {
+      display: flex;
+      width: 80%;
       height: 100%;
+      .img-wrapper {
+        position: relative;
+        img {
+          @include wh(2.8rem, 2.8rem);
+        }
+        .total-count {
+          position: absolute;
+          padding: 0 0.02rem;
+          line-height: 0.8rem;
+          text-align: center;
+          top: 1rem;
+          right: 0.2rem;
+          min-width: 0.8rem;
+          height: 0.8rem;
+          border-radius: 0.8rem;
+          background: #ff4b33;
+          @include sc(0.5rem, #fff);
+        }
+      }
+      .count {
+        width: 60%;
+        height: 100%;
 
-      .price {
-        padding-top: 0.8rem;
-        font-size: 0.7rem;
+        .price {
+          padding-top: 0.8rem;
+          font-size: 0.7rem;
+        }
       }
     }
+
     .count-btn {
       padding-top: 1rem;
       button {

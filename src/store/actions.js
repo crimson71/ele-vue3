@@ -9,7 +9,11 @@ import {
   RECEIVE_FOOD_INCREASE,
   RECEIVE_FOOD_DECREASE,
   CHANGE_DROP_BALL,
-  BALL_CHANGE_SHOW
+  BALL_CHANGE_SHOW,
+  CLEAR_CART,
+  RECEIVE_SHOP_SCORE,
+  RECEIVE_SHOP_RATING_TAGS,
+  RECEIVE_RATINGS_CONTENT
 
 } from './mutation-types'
 import {
@@ -19,7 +23,10 @@ import {
   getLocalPosition,
   getGoods,
   getRatings,
-  getInfo
+  getInfo,
+  getShopScore,
+  getRatingTags,
+  getRatingContent
 
 } from '../api/getData'
 
@@ -104,6 +111,31 @@ export default {
   },
   changeDropBall ({ commit }, ball) {
     commit(CHANGE_DROP_BALL, ball)
+  },
+  // 清空购物车
+  clearCart ({ commit }) {
+    commit(CLEAR_CART)
+  },
+  // 异步获取店铺总体评分
+  async getshopScore ({ commit, state }) {
+    const shopId = state.shopId
+    const { data } = await getShopScore(shopId)
+    const shopScore = data
+    console.log(shopScore)
+    commit(RECEIVE_SHOP_SCORE, { shopScore })
+  },
+  // 异步获取店铺评价tags
+  async getRatingTags ({ commit, state }) {
+    const shopId = state.shopId
+    const { data } = await getRatingTags(shopId)
+    const shopTags = data
+    commit(RECEIVE_SHOP_RATING_TAGS, { shopTags })
+  },
+  // 异步获取评价内容
+  async getRatingContent ({ commit }, obj) {
+    const { data } = await getRatingContent(obj)
+    const ratingContent = data
+    commit(RECEIVE_RATINGS_CONTENT, { ratingContent })
   }
 
 }

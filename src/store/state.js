@@ -28,6 +28,9 @@ export default {
     show: false
   }
   ],
-  dropBall: [] // 购物车小球
+  dropBall: [], // 购物车小球
+  shopScore: {}, // 店铺总体评分
+  shopRatingTags: {}, // 店铺评价tags
+  ratingContent: [] // 店铺评价
 
 }

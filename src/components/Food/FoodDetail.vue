@@ -54,7 +54,7 @@ console.log(props.food)
   }
   .food-info {
     width: 80%;
-    height: 90%;
+    height: 60%;
     @include center;
     background: #fff;
     padding: 0.8rem 0.8rem;

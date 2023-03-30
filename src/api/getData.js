@@ -67,3 +67,26 @@ export const phoneLogin = (params) => {
     data: params
   })
 }
+// 获取店铺总体评价
+export const getShopScore = (params) => {
+  return request({
+    url: `ugc/v2/restaurants/${params}/ratings/scores`,
+    method: 'get'
+  })
+}
+
+// 获取评价tags
+export const getRatingTags = (params) => {
+  return request({
+    url: `https://elm.cangdu.org/ugc/v2/restaurants/${params}/ratings/tags`,
+    method: 'get'
+  })
+}
+
+export const getRatingContent = (params) => {
+  return request({
+    url: `https://elm.cangdu.org/ugc/v2/restaurants/${params.restaurant_id}/ratings`,
+    method: 'get',
+    data: params
+  })
+}

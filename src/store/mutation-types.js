@@ -12,3 +12,7 @@ export const RECEIVE_FOOD_DECREASE = 'receive_food_decrease' // 减少购物车�
 export const RECEIVE_FOOD_INCREASE = 'receive_food_increase'// 增加购物车数量
 export const BALL_CHANGE_SHOW = 'ball_change_show' // 改變小球的顯示
 export const CHANGE_DROP_BALL = 'change_drop_ball'
+export const CLEAR_CART = 'clear_cart'
+export const RECEIVE_SHOP_SCORE = 'receive_overall_score' // 接收店铺总体评分
+export const RECEIVE_SHOP_RATING_TAGS = 'receive_shop_rating_tags'// 接收店铺评价分类tags
+export const RECEIVE_RATINGS_CONTENT = 'receive_ratings_content' // 接收店铺评价

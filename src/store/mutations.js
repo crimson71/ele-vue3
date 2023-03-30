@@ -11,7 +11,11 @@ import {
   RECEIVE_FOOD_DECREASE,
   RECEIVE_FOOD_INCREASE,
   BALL_CHANGE_SHOW,
-  CHANGE_DROP_BALL
+  CHANGE_DROP_BALL,
+  CLEAR_CART,
+  RECEIVE_SHOP_SCORE,
+  RECEIVE_SHOP_RATING_TAGS,
+  RECEIVE_RATINGS_CONTENT
 
 } from './mutation-types'
 export default {
@@ -64,6 +68,19 @@ export default {
   },
   [CHANGE_DROP_BALL] (state, ball) {
     state.dropBall.push(ball)
+  },
+  [CLEAR_CART] (state) {
+    state.cartFoods.forEach(item => { item.count = 0 })
+    state.cartFoods = []
+  },
+  [RECEIVE_SHOP_SCORE] (state, { shopScore }) {
+    state.shopScore = shopScore
+  },
+  [RECEIVE_SHOP_RATING_TAGS] (state, { shopTags }) {
+    state.shopRatingTags = shopTags
+  },
+  [RECEIVE_RATINGS_CONTENT] (state, { ratingContent }) {
+    state.ratingContent = ratingContent
   }
 
 }
