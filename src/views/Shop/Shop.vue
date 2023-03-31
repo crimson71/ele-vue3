@@ -17,7 +17,7 @@
             :class="route.name === 'shopratings' ? 'link-active' : ''"
           >
             评价
-            <span>{{ useState.shopInfo.rating_count }}</span>
+            <span>{{ useState.shopScore.order_rating_amount }}</span>
           </router-link>
         </div>
         <div class="tab-item">
@@ -43,8 +43,11 @@ const store = useStore()
 const route = useRoute()
 const useState = computed(() => {
   const shopInfo = store.state.info
+  const shopScore = store.state.shopScore
   return {
-    shopInfo
+    shopInfo,
+    shopScore
+
   }
 })
 

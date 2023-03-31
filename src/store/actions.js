@@ -132,10 +132,11 @@ export default {
     commit(RECEIVE_SHOP_RATING_TAGS, { shopTags })
   },
   // 异步获取评价内容
-  async getRatingContent ({ commit }, obj) {
+  async getRatingContent ({ commit }, obj, callBack) {
     const { data } = await getRatingContent(obj)
     const ratingContent = data
     commit(RECEIVE_RATINGS_CONTENT, { ratingContent })
+    callBack && callBack()
   }
 
 }

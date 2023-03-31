@@ -1,5 +1,5 @@
 <template>
-  <div class="rating-container">
+  <div class="rating-container" >
     <div class="score-wrapper">
       <div class="overall-score">
         <span class="overall-score-text">{{
@@ -41,7 +41,12 @@
         >
           {{ tag.name }} {{ tag.count }}
         </li>
+
       </ul>
+      <p class="text-grey-400 text-xs mb-4">
+          <input type="checkbox" name="" id="">
+          只看有内容的评价
+        </p>
     </div>
 
     <div class="ratings-content-wrapper">
@@ -76,8 +81,8 @@
 
 <script setup>
 import RatingStar from '@/components/RatingStar.vue'
-import { computed, onMounted, ref } from 'vue'
-
+import { computed, nextTick, onMounted, ref } from 'vue'
+import BScroll from '@better-scroll/core'
 import { useStore } from 'vuex'
 const store = useStore()
 const useState = computed(() => {
@@ -92,8 +97,16 @@ const useState = computed(() => {
     shopId
   }
 })
+const ratingScroll = ref()
+
 const initRatingContent = (obj) => {
-  store.dispatch('getRatingContent', obj)
+  store.dispatch('getRatingContent', obj, () => {
+    nextTick(() => {
+      ratingScroll.value = new BScroll('.rating-container', {
+        click: true
+      })
+    })
+  })
 }
 const currentIndex = ref(0)
 const selectTag = (tagName, index) => {
@@ -118,6 +131,8 @@ onMounted(() => {
 
 .rating-container {
   padding-top: 0.5rem;
+  height: 100vh;
+  overflow: hidden;
   .score-wrapper {
     display: flex;
     height: 3rem;
@@ -145,6 +160,7 @@ onMounted(() => {
     }
   }
   .rating-tags-wrapper {
+
     ul {
       display: flex;
       flex-wrap: wrap;
@@ -162,6 +178,7 @@ onMounted(() => {
     }
   }
   .ratings-content-wrapper {
+
     ul {
       li {
         margin-bottom: 0.5rem;
