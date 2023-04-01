@@ -10,6 +10,7 @@ import '@/index.css'
 import '@/config/rem.js'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+window.forceWebGL = true
 
 createApp(App)
   .use(store)

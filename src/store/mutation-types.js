@@ -16,3 +16,4 @@ export const CLEAR_CART = 'clear_cart'
 export const RECEIVE_SHOP_SCORE = 'receive_overall_score' // 接收店铺总体评分
 export const RECEIVE_SHOP_RATING_TAGS = 'receive_shop_rating_tags'// 接收店铺评价分类tags
 export const RECEIVE_RATINGS_CONTENT = 'receive_ratings_content' // 接收店铺评价
+export const RECEIVE_SEARCH_INFO = 'receive_search_info' // 搜索结果

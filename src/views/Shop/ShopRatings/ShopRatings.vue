@@ -43,15 +43,15 @@
         </li>
 
       </ul>
-      <p class="text-grey-400 text-xs mb-4">
-          <input type="checkbox" name="" id="">
+      <p class="text-grey-400 text-xs mb-4 flex" @click="realRatingContent = !realRatingContent">
+          <svg-icon name="checkbox" style="width: .8rem;height: .8rem;" :class="realRatingContent ? 'fillBlue':'fillBlank'"></svg-icon>
           只看有内容的评价
         </p>
     </div>
 
     <div class="ratings-content-wrapper">
       <ul>
-        <li v-for="(item, index) in useState.ratingContent" :key="index">
+        <li v-for="(item, index) in ratingContent" :key="index">
           <div class="user-name">
             <svg-icon
               name="person"
@@ -97,6 +97,16 @@ const useState = computed(() => {
     shopId
   }
 })
+const realRatingContent = ref(false)
+const ratingContent = computed(() => {
+  let content = useState.value.ratingContent
+  if (realRatingContent.value) {
+    content = content.filter(item => item.rating_text !== '')
+  }
+
+  return content
+})
+
 const ratingScroll = ref()
 
 const initRatingContent = (obj) => {
@@ -115,16 +125,18 @@ const selectTag = (tagName, index) => {
     restaurant_id: useState.value.shopId,
     tag_name: tagName,
     offset: 0,
-    limit: 20
+    limit: 100
   })
 }
+
 onMounted(() => {
   initRatingContent({
     restaurant_id: useState.value.shopId,
-    limit: 20,
+    limit: 100,
     offset: 0
   })
 })
+
 </script>
 <style lang="scss" scoped>
 @import '../../../common/sass/mixin.scss';
@@ -144,7 +156,6 @@ onMounted(() => {
     .overall-score {
       display: flex;
       margin-right: 0.9rem;
-
       .overall-score-text {
         font-size: 1.5rem;
         color: #ff9a0d;
@@ -176,9 +187,14 @@ onMounted(() => {
         background: lightblue;
       }
     }
+    .fillBlue {
+      fill:$blue;
+    }
+    .fillBlank {
+      fill:#ccc;
+    }
   }
   .ratings-content-wrapper {
-
     ul {
       li {
         margin-bottom: 0.5rem;

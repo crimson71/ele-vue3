@@ -1,5 +1,6 @@
 <template>
-  <router-view></router-view>
+
+    <router-view></router-view>
   <footer-guide class="footer" v-if="$route.meta.showFooter"></footer-guide>
 
 </template>
@@ -17,8 +18,9 @@ onBeforeMount(() => {
 
 </script>
 
-<style>
-.footer {
+<style lang="scss">
+
+  .footer {
   position: fixed;
   bottom: 0;
   left: 0;

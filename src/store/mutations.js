@@ -15,7 +15,8 @@ import {
   CLEAR_CART,
   RECEIVE_SHOP_SCORE,
   RECEIVE_SHOP_RATING_TAGS,
-  RECEIVE_RATINGS_CONTENT
+  RECEIVE_RATINGS_CONTENT,
+  RECEIVE_SEARCH_INFO
 
 } from './mutation-types'
 export default {
@@ -81,6 +82,9 @@ export default {
   },
   [RECEIVE_RATINGS_CONTENT] (state, { ratingContent }) {
     state.ratingContent = ratingContent
+  },
+  [RECEIVE_SEARCH_INFO] (state, { searchInfo }) {
+    state.searchShops = searchInfo
   }
 
 }

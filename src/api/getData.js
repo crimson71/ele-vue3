@@ -90,3 +90,11 @@ export const getRatingContent = (params) => {
     data: params
   })
 }
+// 搜索结果
+export const getSearchInfo = (params) => {
+  return request({
+    url: 'v4/restaurants',
+    method: 'get',
+    data: params
+  })
+}

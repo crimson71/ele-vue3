@@ -18,7 +18,7 @@
       </span>
     </div>
 
-    <router-link :to="{ name: 'search' }" class="search">
+    <router-link :to="{name:'search'}" class="search">
       <svg-icon name="search" class="search-icon" style="width: 1rem;height: 1rem;"></svg-icon>
       <span class="placeholder">请输入关键字</span>
       <input type="button" class="search-bth" value="搜索" />

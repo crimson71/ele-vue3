@@ -149,7 +149,6 @@
   }
   .zc-box {
     height: 5rem;
-
     width: 100%;
     display: flex;
     background: #fff;
@@ -178,13 +177,13 @@
         .zc-title {
           color:#000;
           font-weight: 700;
-          font-size: 1rem;
+          font-size: .6rem;
           margin-bottom: 0.2rem;
         }
         .zc-detail {
           color:#666;
 
-          font-size: 0.8rem;
+          font-size: 0.6rem;
 
         }
       }
@@ -198,10 +197,9 @@
       flex-wrap: wrap;
       li {
         text-align: center;
-        height: 5rem;
+        height: 3rem;
         display: flex;
         flex-direction: column;
-
         width: 25%;
         .nav-icon {
           margin:1.2rem auto;
@@ -209,7 +207,7 @@
           fill: #000;
         }
         .nav-name {
-          font-size: 0.8rem;
+          font-size: 0.6rem;
         }
       }
     }

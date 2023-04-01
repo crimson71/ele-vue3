@@ -13,7 +13,8 @@ import {
   CLEAR_CART,
   RECEIVE_SHOP_SCORE,
   RECEIVE_SHOP_RATING_TAGS,
-  RECEIVE_RATINGS_CONTENT
+  RECEIVE_RATINGS_CONTENT,
+  RECEIVE_SEARCH_INFO
 
 } from './mutation-types'
 import {
@@ -26,7 +27,8 @@ import {
   getInfo,
   getShopScore,
   getRatingTags,
-  getRatingContent
+  getRatingContent,
+  getSearchInfo
 
 } from '../api/getData'
 
@@ -137,6 +139,12 @@ export default {
     const ratingContent = data
     commit(RECEIVE_RATINGS_CONTENT, { ratingContent })
     callBack && callBack()
+  },
+  // 异步获取搜索结果
+  async getSearchinfo ({ commit }, obj) {
+    const { data } = await getSearchInfo(obj)
+    const searchInfo = data
+    commit(RECEIVE_SEARCH_INFO, { searchInfo })
   }
 
 }

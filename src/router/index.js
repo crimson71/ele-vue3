@@ -10,6 +10,7 @@ const Shop = () => import('../views/Shop/Shop.vue')
 const ShopGoods = () => import('../views/Shop/ShopGoods/ShopGoods.vue')
 const ShopRatings = () => import('../views/Shop/ShopRatings/ShopRatings.vue')
 const ShopInfo = () => import('../views/Shop/ShopInfo/ShopInfo.vue')
+const MapDisplay = () => import('../views/Map/MapDisplay.vue')
 
 const routes = [
   {
@@ -89,6 +90,11 @@ const routes = [
     }
 
     ]
+  },
+  {
+    path: '/map',
+    name: 'map',
+    component: MapDisplay
   }
 
 ]

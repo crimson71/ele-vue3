@@ -31,6 +31,8 @@ export default {
   dropBall: [], // 购物车小球
   shopScore: {}, // 店铺总体评分
   shopRatingTags: {}, // 店铺评价tags
-  ratingContent: [] // 店铺评价
+  ratingContent: [], // 店铺评价
+  searchShops: [], // 搜索店铺结果
+  recentSearch: []// 最近搜索，只荐最近十个
 
 }
