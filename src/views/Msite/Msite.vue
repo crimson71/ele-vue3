@@ -1,5 +1,5 @@
 <template>
-  <div class="msite-container">
+  <div class="msite-container" >
     <!-- 头部 -->
     <header-top>
       <template v-slot:left>
@@ -11,11 +11,13 @@
     </header-top>
     <!-- 搜索加定位 -->
     <div class="location">
-      <span class="lc-title">
+      <p class="lc-title">
         <svg-icon name="location" style="width: 1rem;height: 1rem;"></svg-icon>
-        {{ storeState.address.address }}
+
+        <span >{{ storeState.address.address }}</span>
+
         <span class="text-xs float-right px-1 " style="font-size: .2rem;line-height: 2rem;">美食果蔬医药.30分钟送达</span>
-      </span>
+      </p>
     </div>
 
     <router-link :to="{name:'search'}" class="search">

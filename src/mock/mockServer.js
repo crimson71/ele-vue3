@@ -3,6 +3,7 @@ import data from './data.json'
 import location from './location.json'
 import shopList from './shopList.json'
 import shopMenu from './shopMenu.json'
+import userInfo from './userInfo.json'
 
 // 返回定位信息的接口
 Mock.mock(/v1\/cities/, 'get', (options) => {
@@ -39,5 +40,13 @@ Mock.mock(/shopping\/v2\/menu/, 'get', (options) => {
     data: shopMenu,
     code: 0,
     message: 'success'
+  }
+})
+// 返回用户信息接口
+Mock.mock(/v2\/login/, 'post', (options) => {
+  return {
+    data: userInfo,
+    code: 0,
+    message: '登陆成功'
   }
 })

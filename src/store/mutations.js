@@ -16,7 +16,8 @@ import {
   RECEIVE_SHOP_SCORE,
   RECEIVE_SHOP_RATING_TAGS,
   RECEIVE_RATINGS_CONTENT,
-  RECEIVE_SEARCH_INFO
+  RECEIVE_SEARCH_INFO,
+  CLEAR_SEARCH_HISTORY
 
 } from './mutation-types'
 export default {
@@ -83,8 +84,22 @@ export default {
   [RECEIVE_RATINGS_CONTENT] (state, { ratingContent }) {
     state.ratingContent = ratingContent
   },
-  [RECEIVE_SEARCH_INFO] (state, { searchInfo }) {
+  [RECEIVE_SEARCH_INFO] (state, { searchInfo, kw }) {
     state.searchShops = searchInfo
+    if (state.recentSearch.indexOf(kw) === -1) {
+      if (state.recentSearch.length < 10) {
+        state.recentSearch.unshift(kw)
+      } else {
+        state.recentSearch.pop()
+        state.recentSearch.unshift(kw)
+      }
+    }
+  },
+  [CLEAR_SEARCH_HISTORY] (state) {
+    state.recentSearch = []
+  },
+  [RECEIVE_USER_INFO] (state, { userInfo }) {
+    state.userInfo = userInfo
   }
 
 }

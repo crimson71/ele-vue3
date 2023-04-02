@@ -6,7 +6,7 @@
     </div>
 
     <div class="food-info">
-      <img :src="imgBaseUrl" />
+      <img v-lazy="imgBaseUrl" />
       <div class="food-content">
         <p class="food-name">{{ props.food.name }}</p>
         <p class="food-desc ellipsis">{{ props.food.description }}</p>

@@ -4,7 +4,7 @@
     <svg-icon name="arrow-left" class="goback" ></svg-icon>
     </span>
     <slot name="left" ></slot>
-    <span class="title ellipsis">{{props.title}}</span>
+    <span class="title ellipsis"> {{props.title}}</span>
     <slot name="right" ></slot>
   </header>
 </template>

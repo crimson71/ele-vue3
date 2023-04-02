@@ -14,7 +14,9 @@ import {
   RECEIVE_SHOP_SCORE,
   RECEIVE_SHOP_RATING_TAGS,
   RECEIVE_RATINGS_CONTENT,
-  RECEIVE_SEARCH_INFO
+  RECEIVE_SEARCH_INFO,
+  CLEAR_SEARCH_HISTORY,
+  RECEIVE_USER_INFO
 
 } from './mutation-types'
 import {
@@ -28,7 +30,8 @@ import {
   getShopScore,
   getRatingTags,
   getRatingContent,
-  getSearchInfo
+  getSearchInfo,
+  login
 
 } from '../api/getData'
 
@@ -141,10 +144,20 @@ export default {
     callBack && callBack()
   },
   // 异步获取搜索结果
-  async getSearchinfo ({ commit }, obj) {
-    const { data } = await getSearchInfo(obj)
+  async getSearchinfo ({ commit, state }, kw) {
+    const { data } = await getSearchInfo({ geohash: state.geohash, keyword: kw })
     const searchInfo = data
-    commit(RECEIVE_SEARCH_INFO, { searchInfo })
+    commit(RECEIVE_SEARCH_INFO, { searchInfo, kw })
+  },
+  // 清空搜索历史
+  clearSearchHistory ({ commit }) {
+    commit(CLEAR_SEARCH_HISTORY)
+  },
+  async getUserInfo ({ commit }, obj) {
+    const { data } = await login(obj)
+    console.log(data)
+    const userInfo = data.data
+    commit(RECEIVE_USER_INFO, { userInfo })
   }
 
 }

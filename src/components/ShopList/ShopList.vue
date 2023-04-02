@@ -15,7 +15,7 @@
         <div class="li-left">
           <span v-if="item.is_premium" class="premium">品牌</span>
 
-          <img :src="imgBaseUrl+item.image_path" alt="">
+          <img v-lazy="imgBaseUrl+item.image_path" alt="">
         </div>
         <div class="li-rigth">
           <div class="shop-name ellipsis">{{item.name}}</div>

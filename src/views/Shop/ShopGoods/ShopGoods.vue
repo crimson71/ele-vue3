@@ -41,7 +41,7 @@
               @click="showFoodDetail(foodItem)"
             >
               <div class="food-img-wrapper">
-                <img :src="imgBaseUrl" alt="" />
+                <img v-lazy="imgBaseUrl" alt="" />
               </div>
               <div class="food-info">
                 <p class="food-name">

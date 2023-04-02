@@ -1,5 +1,5 @@
 <template>
-  <div class="shop-container">
+  <div class="shop-container"  >
     <shop-header></shop-header>
     <div class="tab">
       <div class="tab-container">
@@ -29,7 +29,13 @@
       </div>
       <div class="invite-friend"><span>好友拼单</span></div>
     </div>
-    <router-view></router-view>
+
+      <router-view v-slot="{Component}">
+      <keep-alive>
+        <component :is="Component"></component>
+      </keep-alive>
+    </router-view>
+
   </div>
 </template>
 
@@ -51,7 +57,6 @@ const useState = computed(() => {
   }
 })
 
-console.log(route.query.id)
 const shopId = route.query.id
 store.state.shopId = shopId
 onBeforeMount(() => {

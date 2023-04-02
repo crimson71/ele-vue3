@@ -11,6 +11,9 @@ const ShopGoods = () => import('../views/Shop/ShopGoods/ShopGoods.vue')
 const ShopRatings = () => import('../views/Shop/ShopRatings/ShopRatings.vue')
 const ShopInfo = () => import('../views/Shop/ShopInfo/ShopInfo.vue')
 const MapDisplay = () => import('../views/Map/MapDisplay.vue')
+const Coupon = () => import('../views/Coupon/Coupon.vue')
+const ActiveCoupon = () => import('../views/Coupon/Children/ActiveCoupon.vue')
+const UnactiveCoupon = () => import('../views/Coupon/Children/UnactiveCoupon.vue')
 
 const routes = [
   {
@@ -95,6 +98,25 @@ const routes = [
     path: '/map',
     name: 'map',
     component: MapDisplay
+  },
+  {
+    path: '/coupon',
+    name: 'coupon',
+    component: Coupon,
+    redirect: { name: 'active' },
+    children: [
+      {
+        path: 'active',
+        component: ActiveCoupon,
+        name: 'active'
+      },
+      {
+        path: 'unactive',
+        component: UnactiveCoupon,
+        name: 'unactive'
+      }
+    ]
+
   }
 
 ]

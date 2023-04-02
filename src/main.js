@@ -10,11 +10,18 @@ import '@/index.css'
 import '@/config/rem.js'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import VueLazyload from 'vue-lazyload'
 window.forceWebGL = true
+const loadimage = require('./assets/images/loading.gif')
 
 createApp(App)
   .use(store)
   .use(router)
   .use(ElementPlus)
+  .use(VueLazyload, {
+    preLoad: 1.3,
+    loading: loadimage,
+    attempt: 1
+  })
   .component('svg-icon', SvgIcon)
   .mount('#app')

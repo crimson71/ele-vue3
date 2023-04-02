@@ -1,29 +1,33 @@
 <template>
   <div class="profile-container">
-    <router-link class="login-box" :to="{ name: 'login' }">
-      <div class="login-left">
+    <div class="userinfo-box" v-if="useState.userInfo">
+      <img :src="imgBaseUrl+useState.userInfo.avatar" alt="" class="avatar"><span class="username">{{ useState.userInfo.name }}</span>
+
+    </div>
+    <router-link class="login-box" :to="{ name: 'login' }" v-else>
+      <div class="login-left flex">
         <svg-icon
           name="person"
           class="login-icon"
           style="width: 1.5rem; height: 1.5rem"
         ></svg-icon>
-        <span>立即登陆</span>
+        <span class="ml-8">立即登陆</span>
       </div>
-      <div class="login-right">
+      <div class="login-right flex">
         <svg-icon
           name="setting"
           fill="#000"
-          style="width: 1.5rem; height: 1.5rem"
+          style="width: 1rem; height: 1rem"
         ></svg-icon>
         <svg-icon
           name="qa"
           fill="#000"
-          style="width: 1.5rem; height: 1.5rem"
+          style="width:1rem; height:1rem"
         ></svg-icon>
       </div>
     </router-link>
     <!-- 我的资产 -->
-    <div class="zc-box">
+    <router-link class="zc-box" :to="{name:'coupon'}">
       <div class="zc-left">
         <svg-icon name="wjj" style="margin: auto;"></svg-icon>
         <span style="margin-top: 0.3rem;">我的资产</span>
@@ -57,7 +61,7 @@
           <span class="zc-detail">查看我的卡包</span>
         </div>
       </div>
-    </div>
+    </router-link>
     <!-- 导航 -->
     <nav class="nav-container">
       <ul class="nav-ul">
@@ -116,6 +120,21 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
+import Cookie from 'js-cookie'
+const imgBaseUrl = '//elm.cangdu.org'
+
+const store = useStore()
+const useState = computed(() => {
+  const userInfo = store.state.userInfo
+  return {
+    userInfo
+  }
+})
+Cookie.set('username', useState.value.userInfo.name)
+Cookie.set('userId', useState.value.userInfo.id)
 
 </script>
 
@@ -123,16 +142,38 @@
 @import '../../common/sass/mixin.scss';
 .profile-container {
   padding: 0 0.5rem;
+  .userinfo-box {
+    display: flex;
+    position: relative;
+    background: #fff;
+    width: 100%;
+    height: 3rem;
+    .avatar {
+      width: 10%;
+      height: 50%;
+      border-radius: 50%;
+      @include ct;
+    }
+    .username {
+      margin-left: 2rem;
+      color: #000;
+      font-size: .8rem;
+      font-weight: 700;
+      line-height: 3rem;
+    }
+  }
   .login-box {
+    position: relative;
     width: 100%;
     height: 3rem;
     line-height: 3rem;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     display: flex;
     justify-content: space-between;
     .login-icon {
       fill: $blue;
       vertical-align: middle;
+      @include ct;
 
     }
     span {
@@ -143,7 +184,7 @@
     .login-right {
       .svg-icon {
         margin-left: 0.8rem;
-        vertical-align: middle;
+        margin-top: .8rem;
       }
     }
   }

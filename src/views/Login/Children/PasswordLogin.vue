@@ -16,14 +16,19 @@
           v-model="pwd"
         />
         <input type="text" placeholder="密码" v-else v-model="pwd" />
-        <input type="text" placeholder="请输入验证码" v-model="captcha">
+        <div class="captcha-wrapper">
+          <input type="text" placeholder="请输入验证码" v-model="captcha">
+          <img class="captcha-img" :src="captchaImg" alt="" @click="getCaptchaImg">
+
+        </div>
+
         <div class="switch_show_pwd">
           <svg-icon name="eye" v-if="showPwd" @click="switchShowPwd"></svg-icon>
           <svg-icon name="no_eye" v-else @click="switchShowPwd"></svg-icon>
         </div>
       </div>
 
-      <input type="button" value="登陆" class="login-btn" />
+      <input type="button" value="登陆" class="login-btn" :class="checkInfo? 'active-btn' : ''" @click="login"/>
 
       <div class="login-handel">
         <router-link :to="{ name: 'phonelogin' }" class="link">
@@ -41,14 +46,46 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { getCaptcha } from '@/api/getData'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const store = useStore()
 const name = ref('') // 用户名
 const pwd = ref('') // 密码
 const captcha = ref('')// 图形验证码
+const captchaImg = ref('')
 const showPwd = ref(false) // 控制密码的显示，false是不显示
+
 const switchShowPwd = () => {
   showPwd.value = !showPwd.value
 }
+const getCaptchaImg = async () => {
+  const { data } = await getCaptcha()
+  captchaImg.value = data.code
+}
+// 检验信息是否完整
+const checkInfo = computed(() => {
+  let flag = false
+  if (name.value && pwd.value && captcha.value) {
+    flag = true
+  } else {
+    flag = false
+  }
+  return flag
+})
+// 登陆
+const login = () => {
+  if (name.value && pwd.value && captcha.value) {
+    store.dispatch('getUserInfo', { username: name.value, password: pwd.value, captcha_code: captcha.value })
+  }
+  router.replace({ name: 'profile' })
+}
+onMounted(() => {
+  getCaptchaImg()
+})
 
 </script>
 
@@ -57,6 +94,10 @@ const switchShowPwd = () => {
 .login-container {
   padding: .6rem;
   background: #fff;
+  .active-btn {
+    background: $blue;
+    color:#fff;
+  }
   .login-header {
     display: flex;
     justify-content: space-between;
@@ -93,6 +134,15 @@ const switchShowPwd = () => {
       color: 1.2rem;
       font-weight: normal;
       outline: none;
+    }
+    .captcha-wrapper {
+      position: relative;
+      .captcha-img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30%;
+      }
     }
     .login-handel {
       display: flex;

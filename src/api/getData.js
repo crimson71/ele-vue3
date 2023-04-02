@@ -98,3 +98,42 @@ export const getSearchInfo = (params) => {
     data: params
   })
 }
+// < ------------------------用户登陆部分的请求-------------->
+// 获取图形验证码
+export const getCaptcha = () => {
+  return request({
+    url: 'v1/captchas',
+    method: 'post'
+  })
+}
+// 登陆
+export const login = (params) => {
+  return request({
+    url: 'v2/login',
+    method: 'post',
+    data: params
+  })
+}
+// 登出
+export const logout = () => {
+  return request({
+    url: 'v2/signout',
+    method: 'get'
+  })
+}
+// 获取可用红包
+export const getActiveCoupon = (parmas) => {
+  return request({
+    url: `promotion/v2/users/${parmas.user_id}/hongbaos`,
+    method: 'get',
+    data: parmas
+  })
+}
+// 获取过期红包
+export const getUnactiveCoupon = (parmas) => {
+  return request({
+    url: `promotion/v2/users/${parmas.user_id}/expired_hongbaos`,
+    method: 'get',
+    data: parmas
+  })
+}
