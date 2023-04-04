@@ -16,7 +16,9 @@ import {
   RECEIVE_RATINGS_CONTENT,
   RECEIVE_SEARCH_INFO,
   CLEAR_SEARCH_HISTORY,
-  RECEIVE_USER_INFO
+  RECEIVE_USER_INFO,
+  RECEIVE_ORDER,
+  RECEIVE_TOKEN
 
 } from './mutation-types'
 import {
@@ -31,7 +33,9 @@ import {
   getRatingTags,
   getRatingContent,
   getSearchInfo,
-  login
+  login,
+  getOrder,
+  logout
 
 } from '../api/getData'
 
@@ -155,9 +159,23 @@ export default {
   },
   async getUserInfo ({ commit }, obj) {
     const { data } = await login(obj)
-    console.log(data)
+    const token = 'Bear irohohrowehrwohwo'
     const userInfo = data.data
-    commit(RECEIVE_USER_INFO, { userInfo })
+    commit(RECEIVE_USER_INFO, { userInfo, token })
+  },
+  async getOrderInfo  ({ commit }, { id, limit }) {
+    console.log(id, 'id')
+    const { data } = await getOrder({ user_id: id, limit: limit })
+    console.log(data, 'order')
+    const orderInfo = data
+    commit(RECEIVE_ORDER, { orderInfo })
+  },
+  getToken ({ commit }) {
+    commit(RECEIVE_TOKEN)
+  },
+  async logout () {
+    const { data } = await logout()
+    console.log(data)
   }
 
 }

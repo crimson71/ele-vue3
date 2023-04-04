@@ -12,7 +12,15 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import VueLazyload from 'vue-lazyload'
 window.forceWebGL = true
+
 const loadimage = require('./assets/images/loading.gif')
+// router.beforeEach((to, from, next) => {
+//   store.dispatch('getToken')
+//   const token = store.state.token
+//   if (!token && to.name !== 'login') {
+//     next({ name: 'login' })
+//   } else { next() }
+// })
 
 createApp(App)
   .use(store)

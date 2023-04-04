@@ -19,7 +19,7 @@
     "vue": "^3.2.13",
     "vue-baidu-map": "^0.21.22",
     "vue-lazyload": "^3.0.0-rc.2",
-    "vue-router": "^4.0.3",
+    "vue-router": "^4.1.6",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
@@ -41,6 +41,7 @@
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
     "svg-sprite-loader": "^6.0.11",
-    "tailwindcss": "latest"
+    "tailwindcss": "latest",
+    "vue-router": "^4.1.6"
   }
 }

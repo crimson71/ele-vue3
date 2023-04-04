@@ -1,4 +1,4 @@
-
+import Cookie from 'js-cookie'
 import {
   RECEIVE_CITY,
   RECEIVE_ADDRESS,
@@ -17,7 +17,9 @@ import {
   RECEIVE_SHOP_RATING_TAGS,
   RECEIVE_RATINGS_CONTENT,
   RECEIVE_SEARCH_INFO,
-  CLEAR_SEARCH_HISTORY
+  CLEAR_SEARCH_HISTORY,
+  RECEIVE_ORDER,
+  RECEIVE_TOKEN
 
 } from './mutation-types'
 export default {
@@ -98,8 +100,19 @@ export default {
   [CLEAR_SEARCH_HISTORY] (state) {
     state.recentSearch = []
   },
-  [RECEIVE_USER_INFO] (state, { userInfo }) {
+  [RECEIVE_USER_INFO] (state, { userInfo, token }) {
     state.userInfo = userInfo
+    state.userId = userInfo.user_id
+    state.token = token
+    Cookie.set('token', token)
+    Cookie.set('userid', userInfo.user_id)
+    Cookie.set('userinfo', JSON.stringify(userInfo))
+  },
+  [RECEIVE_ORDER] (state, { orderInfo }) {
+    state.orderInfo = orderInfo
+  },
+  [RECEIVE_TOKEN] (state) {
+    console.log('gettoken')
+    state.token = state.token || Cookie.get('token')
   }
-
 }

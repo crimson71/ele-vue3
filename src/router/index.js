@@ -14,6 +14,7 @@ const MapDisplay = () => import('../views/Map/MapDisplay.vue')
 const Coupon = () => import('../views/Coupon/Coupon.vue')
 const ActiveCoupon = () => import('../views/Coupon/Children/ActiveCoupon.vue')
 const UnactiveCoupon = () => import('../views/Coupon/Children/UnactiveCoupon.vue')
+const OrderDetail = () => import('../views/OrederDetail/OrderDetail.vue')
 
 const routes = [
   {
@@ -117,6 +118,11 @@ const routes = [
       }
     ]
 
+  },
+  {
+    path: '/orderdetail',
+    name: 'orderdetail',
+    component: OrderDetail
   }
 
 ]

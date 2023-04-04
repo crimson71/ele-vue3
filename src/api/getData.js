@@ -137,3 +137,11 @@ export const getUnactiveCoupon = (parmas) => {
     data: parmas
   })
 }
+// 获取订单信息
+export const getOrder = (params) => {
+  return request({
+    url: `bos/v2/users/${params.user_id}/orders`,
+    method: 'get',
+    data: { limit: params.limit }
+  })
+}

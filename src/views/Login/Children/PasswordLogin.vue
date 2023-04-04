@@ -80,8 +80,8 @@ const checkInfo = computed(() => {
 const login = () => {
   if (name.value && pwd.value && captcha.value) {
     store.dispatch('getUserInfo', { username: name.value, password: pwd.value, captcha_code: captcha.value })
+    router.push({ name: 'msite' })
   }
-  router.replace({ name: 'profile' })
 }
 onMounted(() => {
   getCaptchaImg()

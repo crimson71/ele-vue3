@@ -18,3 +18,5 @@ export const RECEIVE_SHOP_RATING_TAGS = 'receive_shop_rating_tags'// 接收店�
 export const RECEIVE_RATINGS_CONTENT = 'receive_ratings_content' // 接收店铺评价
 export const RECEIVE_SEARCH_INFO = 'receive_search_info' // 搜索结果
 export const CLEAR_SEARCH_HISTORY = 'clear_search_history' // 清空搜索历史
+export const RECEIVE_ORDER = 'receive_order' // 获取订单信息
+export const RECEIVE_TOKEN = 'receive_token' // 获取token

@@ -1,8 +1,11 @@
 <template>
   <div class="profile-container">
-    <div class="userinfo-box" v-if="useState.userInfo">
-      <img :src="imgBaseUrl+useState.userInfo.avatar" alt="" class="avatar"><span class="username">{{ useState.userInfo.name }}</span>
-
+    <div class="userinfo-box" v-if="isLogin">
+      <img :src="imgBaseUrl + userInfo.avatar" alt="" class="avatar" /><span
+        class="username"
+        >{{ userInfo.name }}</span
+      >
+      <span @click="userlogout" class="text-xs mt-3 ">退出登陆</span>
     </div>
     <router-link class="login-box" :to="{ name: 'login' }" v-else>
       <div class="login-left flex">
@@ -22,15 +25,15 @@
         <svg-icon
           name="qa"
           fill="#000"
-          style="width:1rem; height:1rem"
+          style="width: 1rem; height: 1rem"
         ></svg-icon>
       </div>
     </router-link>
     <!-- 我的资产 -->
-    <router-link class="zc-box" :to="{name:'coupon'}">
+    <div class="zc-box" @click="goCoupon">
       <div class="zc-left">
-        <svg-icon name="wjj" style="margin: auto;"></svg-icon>
-        <span style="margin-top: 0.3rem;">我的资产</span>
+        <svg-icon name="wjj" style="margin: auto"></svg-icon>
+        <span style="margin-top: 0.3rem">我的资产</span>
       </div>
       <div class="zc-right">
         <div class="right-item">
@@ -61,7 +64,7 @@
           <span class="zc-detail">查看我的卡包</span>
         </div>
       </div>
-    </router-link>
+    </div>
     <!-- 导航 -->
     <nav class="nav-container">
       <ul class="nav-ul">
@@ -116,25 +119,42 @@
       </ul>
     </nav>
   </div>
-
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
 
 import Cookie from 'js-cookie'
-const imgBaseUrl = '//elm.cangdu.org'
+import { onBeforeMount, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
+const router = useRouter()
 const store = useStore()
-const useState = computed(() => {
-  const userInfo = store.state.userInfo
-  return {
-    userInfo
+const imgBaseUrl = '//elm.cangdu.org'
+const userInfo = ref()
+const isLogin = ref(false)
+
+const getUserInfo = () => {
+  if (Cookie.get('token')) {
+    isLogin.value = true
+    userInfo.value = JSON.parse(Cookie.get('userinfo'))
   }
+}
+const userlogout = () => {
+  isLogin.value = false
+  store.dispatch('logout')
+  Cookie.remove('token')
+  Cookie.remove('userinfo')
+  Cookie.remove('userid')
+  userInfo.value = ''
+}
+const goCoupon = () => {
+  if (!isLogin.value) return router.push({ name: 'login' })
+  router.push({ name: 'coupon', query: { id: userInfo.value.user_id } })
+}
+onBeforeMount(async () => {
+  getUserInfo()
 })
-Cookie.set('username', useState.value.userInfo.name)
-Cookie.set('userId', useState.value.userInfo.id)
 
 </script>
 
@@ -144,6 +164,7 @@ Cookie.set('userId', useState.value.userInfo.id)
   padding: 0 0.5rem;
   .userinfo-box {
     display: flex;
+    justify-content: space-between;
     position: relative;
     background: #fff;
     width: 100%;
@@ -157,7 +178,7 @@ Cookie.set('userId', useState.value.userInfo.id)
     .username {
       margin-left: 2rem;
       color: #000;
-      font-size: .8rem;
+      font-size: 0.8rem;
       font-weight: 700;
       line-height: 3rem;
     }
@@ -174,7 +195,6 @@ Cookie.set('userId', useState.value.userInfo.id)
       fill: $blue;
       vertical-align: middle;
       @include ct;
-
     }
     span {
       font-size: 1rem;
@@ -184,7 +204,7 @@ Cookie.set('userId', useState.value.userInfo.id)
     .login-right {
       .svg-icon {
         margin-left: 0.8rem;
-        margin-top: .8rem;
+        margin-top: 0.8rem;
       }
     }
   }
@@ -213,19 +233,18 @@ Cookie.set('userId', useState.value.userInfo.id)
         .zc-icon {
           margin: auto;
           fill: red;
-          margin-bottom: .3rem;
+          margin-bottom: 0.3rem;
         }
         .zc-title {
-          color:#000;
+          color: #000;
           font-weight: 700;
-          font-size: .6rem;
+          font-size: 0.6rem;
           margin-bottom: 0.2rem;
         }
         .zc-detail {
-          color:#666;
+          color: #666;
 
           font-size: 0.6rem;
-
         }
       }
     }
@@ -243,7 +262,7 @@ Cookie.set('userId', useState.value.userInfo.id)
         flex-direction: column;
         width: 25%;
         .nav-icon {
-          margin:1.2rem auto;
+          margin: 1.2rem auto;
           margin-bottom: 0.1rem;
           fill: #000;
         }
